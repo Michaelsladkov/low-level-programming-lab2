@@ -1,0 +1,46 @@
+/*
+    Parser for my Cypher-based querry language
+*/
+%require "3.2"
+%language "c++"
+
+%skeleton "lalr1.cc"
+
+%token
+    MATCH_KEYWORD
+    WHERE_KEYWORD
+    RETURN_KEYWORD
+    CREATE_KEYWORD
+    DELETE_KEYWORD
+    MERGE_KEYWORD
+    SET_KEYWORD
+    AND_KEYMORD
+    OR_KEYWORD
+    NOT_KEYWORD
+    GREATER_CMP
+    GREATER_OR_EUQAL_CMP
+    LESS_CMP
+    LESS_OR_EQUAL_CMP
+    EQUAL_CMP
+    CONTAINS_OP
+    ASSIGNMENT
+    DASH
+    RIGHT_ARROW
+    LEFT_ARROW
+    DOUBLE_DASH
+    COLON
+    SCOLON
+    PERIOD
+    LPAR
+    RPAR
+    LBRACKET
+    RBRACKET
+    LBRACE
+    RBRACE
+    BOOL_LITERAL
+    INT_LITERAL
+    FLOAT_LITERAL
+    STRING_LITERAL
+    NAME
+    END_OF_FILE
+;
