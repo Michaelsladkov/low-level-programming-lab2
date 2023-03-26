@@ -98,6 +98,14 @@
 
     - CREATE variable match relation match variable match
 
+- value
+    - literal of any type
+    - variable.field
+
 - SET expression
 
-    - SET variable.field = 
+    SET variable.field = value
+
+- DELETE expression
+
+    DELETE variable
