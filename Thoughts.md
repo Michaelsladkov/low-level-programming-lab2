@@ -42,14 +42,7 @@
 
 - variable match
 
-    - (variable:Schema {attr1: val1, ... attrN: valN})
-
-    Список атрибутов опционален
-
     - (variable:Schema WHERE filters)
-
-    - any previously matched variable
-
 - any variable match
 
     (variable)
@@ -109,3 +102,11 @@
 - DELETE expression
 
     DELETE variable
+
+- FILTER
+
+    value op value
+
+- FILTER_CHAIN
+    - WHERE FILTER
+    - FiILTER_CHAIN FILTER

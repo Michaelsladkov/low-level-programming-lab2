@@ -35,6 +35,7 @@ STRING    \".*\"
 ":"                    {return yy::parser::token_type::COLON               }
 ";"                    {return yy::parser::token_type::SCOLON              }
 "."                    {return yy::parser::token_type::PERIOD              }
+","                    {return yy::parser::token_type::COMMA               }
 "("                    {return yy::parser::token_type::LPAR                }
 ")"                    {return yy::parser::token_type::RPAR                }
 "["                    {return yy::parser::token_type::LBRACKET            }
@@ -47,4 +48,5 @@ STRING    \".*\"
 {STRING}               {return yy::parser::token_type::STRING_LITERAL      }
 {NAME}                 {return yy::parser::token_type::NAME                }
 <<EOF>>                {return yy::parser::token_type::END_OF_FILE         }
+{WS} //do nothing
 %%
