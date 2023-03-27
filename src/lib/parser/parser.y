@@ -8,6 +8,7 @@
 
 %code requires 
 {
+#include "ast.hpp"
 #include <string>
 }
 
@@ -17,7 +18,7 @@
     std::string *string;
     INode       *iNode;
     ReturnList  *returnList;
-    Value       *Value;
+    ValueNode   *Value;
     int         integer;
     float       real;
     bool        boolean;
@@ -65,22 +66,22 @@
 
 %nterm <iNode>       REQUEST
 %nterm <iNode>       REQUEST_B
-%nterm <iNode>       MATCH_QUERRY
-%nterm <iNode>       ANY_VARIABLE_MATCH
-%nterm <iNode>       VARIABLE_MATCH
-%nterm <iNode>       ANY_RELATION_MATCH
-%nterm <iNode>       RELATION_MATCH
-%nterm <iNode>       MATCH_QUERRY
+%nterm <iNode>       MATCH_QUERRY //described
+%nterm <iNode>       ANY_VARIABLE_MATCH //described
+%nterm <iNode>       VARIABLE_MATCH //described
+%nterm <iNode>       ANY_RELATION_MATCH //described
+%nterm <iNode>       RELATION_MATCH //described
 %nterm <iNode>       RETURN_EXPRESSION
 %nterm <returnList>  RETURN_LIST
-%nterm <Value>       VALUE
+%nterm <Value>       VALUE //described
 %nterm <iNode>       CREATE_QUERRY
 %nterm <iNode>       SET_EXPRESSION
 %nterm <iNode>       DELETE_EXPRESSION
-%nterm <iNode>       FILTER
-%nterm <iNode>       FILTER_CHAIN
-%nterm <iNode>       ATTRIBUTE_LIST
-%nterm <iNode>       ATTRIBUTE
+%nterm <iNode>       FILTER //described
+%nterm <iNode>       PREDICATE //described
+%nterm <iNode>       LOGICAL_EXPRESSION //described
+%nterm <iNode>       ATTRIBUTE_LIST //described
+%nterm <iNode>       ATTRIBUTE //described
 
 %left OR_KEYWORD
 %left AND_KEYMORD
@@ -93,7 +94,7 @@ REQUEST: REQUEST_B SCOLON
        | REQUEST_B END_OF_FILE
 
 REQUEST_B: MATCH_QUERRY
-         | REQUEST_B FILTER_CHAIN
+         | REQUEST_B PREDICATE
          | REQUEST_B SET_EXPRESSION
          | REQUEST_B CREATE_QUERRY
          | REQUEST_B DELETE_EXPRESSION
@@ -107,7 +108,7 @@ MATCH_QUERRY: MATCH_KEYWORD VARIABLE_MATCH
             | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH
 ;
 
-VARIABLE_MATCH: LPAR NAME COLON NAME FILTER_CHAIN RPAR
+VARIABLE_MATCH: LPAR NAME COLON NAME PREDICATE RPAR
               | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR
 ;
 
@@ -121,11 +122,13 @@ RELATION_MATCH: DASH LBRACKET NAME COLON NAME RBRACKET RIGHT_ARROW
 ANY_RELATION_MATCH: DOUBLE_DASH
 ;
 
-FILTER_CHAIN: WHERE_KEYWORD FILTER
-            | WHERE_KEYWORD NOT_KEYWORD FILTER
-            | FILTER_CHAIN OR_KEYWORD FILTER
-            | FILTER_CHAIN AND_KEYMORD FILTER_CHAIN
-            | FILTER_CHAIN NOT_KEYWORD FILTER
+PREDICATE: WHERE_KEYWORD LOGICAL_EXPRESSION
+;
+
+LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYMORD LOGICAL_EXPRESSION
+                  | LOGICAL_EXPRESSION OR_KEYWORD LOGICAL_EXPRESSION
+                  | NOT_KEYWORD LOGICAL_EXPRESSION
+                  | FILTER
 ;
 
 FILTER: VALUE LESS_CMP VALUE

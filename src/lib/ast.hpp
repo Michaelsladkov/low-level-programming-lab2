@@ -1,0 +1,327 @@
+#pragma once
+
+#include <string>
+#include <unordered_map>
+
+class INode {
+public:
+    virtual ~INode() {}
+    virtual void print(int level, std::ostream out) const = 0;
+};
+
+class ValueNode : public INode {
+    
+};
+
+class VariableValueNode : public ValueNode {
+    std::string VariableName;
+    std::string FieldName;
+public:
+    VariableValueNode(const char *VName, const char *FName) {
+        VariableName = std::string(VName);
+        FieldName = std::string(FName);
+    }
+    const std::string& getVariableName() {
+        return VariableName;
+    }
+    const std::string& getFieldName() {
+        return FieldName;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class StringLiteralNode : public ValueNode {
+    std::string Value;
+public:
+    StringLiteralNode(const char* Val) {
+        Value = std::string(Val);
+    }
+    const std::string& getValue() const {
+        return Value;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class BoolLiteralNode : public ValueNode {
+    bool Value;
+public:
+    BoolLiteralNode(bool Val) {
+        Value = Val;
+    }
+    bool getValue() const {
+        return Value;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class IntLiteralNode : public ValueNode {
+    int Value;
+public:
+    IntLiteralNode(int Val) {
+        Value = Val;
+    }
+    int getValue() const {
+        return Value;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class FloatLiteralNode : public ValueNode {
+    float Value;
+public:
+    FloatLiteralNode(float Val) {
+        Value = Val;
+    }
+    float getValue() const {
+        return Value;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+enum FilterCheckOperation {
+    GREATER,
+    GREATER_OR_EQUAL,
+    LESS,
+    LESS_OR_EQUAL,
+    EQUAL,
+    CONTAINS
+};
+
+class FilterNode : public INode {
+    ValueNode *RHS;
+    ValueNode *LHS;
+    FilterCheckOperation Operation;
+public:
+    FilterNode(ValueNode *Right, ValueNode *Left, FilterCheckOperation Op) {
+        RHS = Right;
+        LHS = Left;
+        Operation = Op;
+    }
+    const virtual ValueNode* getRHS() const {
+        return RHS;
+    }
+    const virtual ValueNode* getLHS() const {
+        return LHS;
+    }
+    const virtual FilterCheckOperation getOperation() const {
+        return Operation;
+    }
+    virtual ~FilterNode() override {
+        delete RHS;
+        delete LHS;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class LogicalExpressionNode : public INode {
+
+};
+
+class FilterByPassNode : public LogicalExpressionNode {
+    FilterNode *Wrapped;
+public:
+    FilterByPassNode(class FilterNode *F){
+        Wrapped = F;
+    }
+    const virtual FilterNode* getFilter() const {
+        return Wrapped;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class NotOperationNode : public LogicalExpressionNode {
+    LogicalExpressionNode *Operand;
+public:
+    NotOperationNode(LogicalExpressionNode *Op) {
+        Operand = Op;
+    }
+    const virtual LogicalExpressionNode* getOperand() const {
+        return Operand;
+    }
+    virtual ~NotOperationNode() override {
+        delete Operand;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class BinaryLogicalOperationNode : public LogicalExpressionNode {
+protected:
+    LogicalExpressionNode *RHS;
+    LogicalExpressionNode *LHS;
+    BinaryLogicalOperationNode(LogicalExpressionNode *Left, LogicalExpressionNode *Right) {
+        RHS = Right;
+        LHS = Left;
+    }
+public:
+    const virtual LogicalExpressionNode* getLeft() const {
+        return LHS;
+    }
+    const virtual LogicalExpressionNode* getRight() const {
+        return RHS;
+    }
+    virtual ~BinaryLogicalOperationNode() override {
+        delete RHS;
+        delete LHS;
+    }
+};
+
+class AndOperationNode : public BinaryLogicalOperationNode {
+public:
+    AndOperationNode(LogicalExpressionNode *Left, LogicalExpressionNode *Right) : BinaryLogicalOperationNode(Left, Right) {}
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class OrOperationNode : public BinaryLogicalOperationNode {
+public:
+    OrOperationNode(LogicalExpressionNode *Left, LogicalExpressionNode *Right) : BinaryLogicalOperationNode(Left, Right) {}
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class PredicateNode : public INode {
+    LogicalExpressionNode *Body;
+public:
+    PredicateNode(LogicalExpressionNode *Expr) {
+        Body = Expr;
+    }
+    const LogicalExpressionNode* getExpr() const {
+        return Body;
+    }
+    virtual ~PredicateNode() {
+        delete Body;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class AttributeListNode : public INode {
+    std::unordered_map<std::string, ValueNode*> AttrList;
+public:
+    bool addAttribute(const char* name, ValueNode* Value) {
+        if (AttrList.count(name)) return false;
+        AttrList[name] = Value;
+        return true;
+    }
+    const std::unordered_map<std::string, ValueNode*>& getAttributeList() const {
+        return AttrList;
+    }
+    virtual ~AttributeListNode() override {
+        for (auto &[name, p] : AttrList) {
+            delete p;
+        }
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class VariableMatchNode : public INode {
+protected:
+    std::string VariableName;
+    std::string SchemeName;
+public:
+    VariableMatchNode(const char* Var, const char* Scheme) {
+        VariableName = std::string(Var);
+        SchemeName = std::string(Scheme);
+    }
+    const std::string& getVariableName() const {
+        return VariableName;
+    }
+    const std::string& getSchemeName() const {
+        return SchemeName;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class VariablePatternMatchNode : public VariableMatchNode {
+    AttributeListNode *Pattern;
+public:
+    VariablePatternMatchNode(const char* Var, const char* Scheme, AttributeListNode* AttrList) :
+        VariableMatchNode(Var, Scheme) {
+        Pattern = AttrList;
+    }
+    virtual ~VariablePatternMatchNode() override {
+        delete Pattern;
+    }
+    const AttributeListNode* getPattern() const {
+        return Pattern;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class VariableFilterMatchNode : public VariableMatchNode {
+    PredicateNode* Predicate;
+public:
+    VariableFilterMatchNode(const char* Var, const char* Scheme, PredicateNode* Filters) :
+        VariableMatchNode(Var, Scheme) {
+        Predicate = Filters;
+    }
+    virtual ~VariableFilterMatchNode() {
+        delete Predicate;
+    }
+    const PredicateNode* getFilter() const {
+        return Predicate;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+enum RelationDirection {
+    FORWARD,
+    REVERSE,
+    ANY
+};
+
+class RelationMatchNode : public INode {
+    std::string VariableName;
+    std::string RelationName;
+    RelationDirection Direction;
+public:
+    RelationMatchNode(const char* Var, const char* Rel, RelationDirection Dir) {
+        VariableName = std::string(Var);
+        RelationName = std::string(Rel);
+        Direction = Dir;
+    }
+    virtual void print(int level, std::ostream out) const override;
+    const std::string& getVariableName() const {
+        return VariableName;
+    }
+    const std::string& getRelationName() const {
+        return RelationName;
+    }
+    RelationDirection getDirection() const {
+        return Direction;
+    }
+};
+
+class MatchQuerryNode : public INode {
+    VariableMatchNode *LeftNode;
+    VariableMatchNode *RightNode;
+    RelationMatchNode *Relation;
+public:
+    MatchQuerryNode(VariableMatchNode *Node) {
+        LeftNode = Node;
+        RightNode = nullptr;
+        Relation = nullptr;
+    }
+    MatchQuerryNode(VariableMatchNode *Left, VariableMatchNode *Right) {
+        LeftNode = Left;
+        RightNode = Right;
+        Relation = new RelationMatchNode("", "", ANY);
+    }
+    MatchQuerryNode(VariableMatchNode *Left, VariableMatchNode *Right, RelationMatchNode *Rel) {
+        LeftNode = Left;
+        RightNode = Right;
+        Relation = Rel;
+    }
+    virtual void print(int level, std::ostream out) const override;
+    const VariableMatchNode* getRightMatchNode() const {
+        return RightNode;
+    }
+    const VariableMatchNode* getLeftMatchNode() const {
+        return LeftNode;
+    }
+    const RelationMatchNode* getRelationMatchNode() const {
+        return Relation;
+    }
+    virtual ~MatchQuerryNode() {
+        delete LeftNode;
+        delete RightNode;
+        delete Relation;
+    }
+};
