@@ -7,7 +7,7 @@
 class INode {
 public:
     virtual ~INode() {}
-    virtual void print(int level, std::ostream out) const = 0;
+    virtual void print(int level, std::ostream& out) const = 0;
 };
 
 class ExpressionNode : public INode {
@@ -32,7 +32,7 @@ public:
     const std::string& getFieldName() {
         return FieldName;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class StringLiteralNode : public ValueNode {
@@ -44,7 +44,7 @@ public:
     const std::string& getValue() const {
         return Value;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class BoolLiteralNode : public ValueNode {
@@ -56,7 +56,7 @@ public:
     bool getValue() const {
         return Value;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class IntLiteralNode : public ValueNode {
@@ -68,7 +68,7 @@ public:
     int getValue() const {
         return Value;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class FloatLiteralNode : public ValueNode {
@@ -80,7 +80,7 @@ public:
     float getValue() const {
         return Value;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 enum FilterCheckOperation {
@@ -115,7 +115,7 @@ public:
         delete RHS;
         delete LHS;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class LogicalExpressionNode : public INode {
@@ -131,7 +131,7 @@ public:
     const virtual FilterNode* getFilter() const {
         return Wrapped;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class NotOperationNode : public LogicalExpressionNode {
@@ -146,7 +146,7 @@ public:
     virtual ~NotOperationNode() override {
         delete Operand;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class BinaryLogicalOperationNode : public LogicalExpressionNode {
@@ -173,13 +173,13 @@ public:
 class AndOperationNode : public BinaryLogicalOperationNode {
 public:
     AndOperationNode(LogicalExpressionNode *Left, LogicalExpressionNode *Right) : BinaryLogicalOperationNode(Left, Right) {}
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class OrOperationNode : public BinaryLogicalOperationNode {
 public:
     OrOperationNode(LogicalExpressionNode *Left, LogicalExpressionNode *Right) : BinaryLogicalOperationNode(Left, Right) {}
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class PredicateNode : public INode {
@@ -194,7 +194,7 @@ public:
     virtual ~PredicateNode() {
         delete Body;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class AttributeListNode : public INode {
@@ -213,7 +213,7 @@ public:
             delete p;
         }
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class VariableMatchNode : public INode {
@@ -231,7 +231,7 @@ public:
     const std::string& getSchemeName() const {
         return SchemeName;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class VariablePatternMatchNode : public VariableMatchNode {
@@ -247,7 +247,7 @@ public:
     const AttributeListNode* getPattern() const {
         return Pattern;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class VariableFilterMatchNode : public VariableMatchNode {
@@ -263,7 +263,7 @@ public:
     const PredicateNode* getFilter() const {
         return Predicate;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 enum RelationDirection {
@@ -282,7 +282,7 @@ public:
         RelationName = std::string(Rel);
         Direction = Dir;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
     const std::string& getVariableName() const {
         return VariableName;
     }
@@ -314,7 +314,7 @@ public:
         RightNode = Right;
         Relation = Rel;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
     const VariableMatchNode* getRightMatchNode() const {
         return RightNode;
     }
@@ -334,7 +334,7 @@ public:
 class ReturnExpressionNode : public ExpressionNode {
     std::vector<ValueNode*> Values;
 public:
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
     void addElement(ValueNode* Val) {
         Values.push_back(Val);
     }
@@ -364,7 +364,7 @@ public:
     const ValueNode* getSource() const {
         return Src;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
 };
 
 class DeleteExpressionNode : public ExpressionNode {
@@ -373,7 +373,7 @@ public:
     DeleteExpressionNode(const char* Name) {
         VariableName = std::string(Name);
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
     const std::string& getVariableName() const {
         return VariableName;
     }
@@ -389,17 +389,12 @@ public:
         RightNode = nullptr;
         Relation = nullptr;
     }
-    CreateExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right) {
-        LeftNode = Left;
-        RightNode = Right;
-        Relation = new RelationMatchNode("", "", ANY);
-    }
     CreateExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right, RelationMatchNode *Rel) {
         LeftNode = Left;
         RightNode = Right;
         Relation = Rel;
     }
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
     const VariableMatchNode* getRightMatchNode() const {
         return RightNode;
     }
@@ -419,7 +414,7 @@ public:
 class Request : public INode {
     std::vector<ExpressionNode*> Expressions;
 public:
-    virtual void print(int level, std::ostream out) const override;
+    virtual void print(int level, std::ostream& out) const override;
     Request(ExpressionNode *Expr) {
         Expressions.push_back(Expr);
     }

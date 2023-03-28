@@ -32,7 +32,7 @@
 
 
 /**
- ** \file /mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/logic.tab.hpp
+ ** \file /mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp
  ** Define the yy::parser class.
  */
 
@@ -41,8 +41,8 @@
 // Undocumented macros, especially those whose name start with YY_,
 // are private implementation details.  Do not rely on them.
 
-#ifndef YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_LOGIC_TAB_HPP_INCLUDED
-# define YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_LOGIC_TAB_HPP_INCLUDED
+#ifndef YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
+# define YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
 // "%code requires" blocks.
 #line 12 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
@@ -53,7 +53,7 @@
 namespace yy { class ParserDriver; }
 
 
-#line 57 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/logic.tab.hpp"
+#line 57 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 # include <cstdlib> // std::abort
@@ -182,7 +182,7 @@ namespace yy { class ParserDriver; }
 #endif
 
 namespace yy {
-#line 186 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/logic.tab.hpp"
+#line 186 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 
@@ -218,7 +218,7 @@ namespace yy {
     float                    real;
     bool                     boolean;
 
-#line 222 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/logic.tab.hpp"
+#line 222 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
     };
 #else
@@ -250,11 +250,11 @@ namespace yy {
         CREATE_KEYWORD = 261,
         DELETE_KEYWORD = 262,
         SET_KEYWORD = 263,
-        AND_KEYMORD = 264,
+        AND_KEYWORD = 264,
         OR_KEYWORD = 265,
         NOT_KEYWORD = 266,
         GREATER_CMP = 267,
-        GREATER_OR_EUQAL_CMP = 268,
+        GREATER_OR_EQUAL_CMP = 268,
         LESS_CMP = 269,
         LESS_OR_EQUAL_CMP = 270,
         EQUAL_CMP = 271,
@@ -743,10 +743,10 @@ namespace yy {
 
 
 } // yy
-#line 747 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/logic.tab.hpp"
+#line 747 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 
 
 
-#endif // !YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_LOGIC_TAB_HPP_INCLUDED
+#endif // !YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED

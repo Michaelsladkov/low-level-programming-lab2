@@ -416,7 +416,7 @@ static int yy_flex_strlen ( const char * );
 #undef yyTABLES_NAME
 #endif
 
-#line 52 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 51 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 
 
 #line 423 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"

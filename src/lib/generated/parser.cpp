@@ -37,9 +37,25 @@
 
 
 
-#include "logic.tab.hpp"
+#include "parser.tab.hpp"
 
 
+// Unqualified %code blocks.
+#line 22 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+
+#include "../driver.hpp"
+
+namespace yy
+{
+
+void parser::error(const std::string&){}
+
+parser::token_type yylex(parser::semantic_type* yylval,                         
+                         ParserDriver* driver);
+
+}
+
+#line 59 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
 
 #ifndef YY_
@@ -111,17 +127,18 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 115 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 131 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
 
   /// Build a parser object.
-  parser::parser ()
+  parser::parser (ParserDriver *driver_yyarg)
 #if YYDEBUG
     : yydebug_ (false),
-      yycdebug_ (&std::cerr)
+      yycdebug_ (&std::cerr),
 #else
-
+    :
 #endif
+      driver (driver_yyarg)
   {}
 
   parser::~parser ()
@@ -467,7 +484,7 @@ namespace yy {
         try
 #endif // YY_EXCEPTIONS
           {
-            yyla.type = yytranslate_ (yylex (&yyla.value));
+            yyla.type = yytranslate_ (yylex (&yyla.value, driver));
           }
 #if YY_EXCEPTIONS
         catch (const syntax_error& yyexc)
@@ -546,67 +563,67 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 103 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 124 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
          { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 552 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 569 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 3:
-#line 104 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 125 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
          { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 558 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
-    break;
-
-  case 5:
-#line 107 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-           { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 564 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 575 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 6:
-#line 108 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 129 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
            { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 570 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 581 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 7:
-#line 109 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 130 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
            { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 576 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 587 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 8:
-#line 110 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 131 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
            { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 582 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 593 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 9:
-#line 111 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 132 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
            { (yylhs.value.request) = (yystack_[1].value.request); }
-#line 588 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 599 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
-  case 22:
-#line 138 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                    { (yylhs.value.logicalExpressionNode) = (yystack_[2].value.logicalExpressionNode); }
-#line 594 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+  case 10:
+#line 133 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+           { (yylhs.value.request) = (yystack_[1].value.request); }
+#line 605 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 23:
-#line 139 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 160 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                     { (yylhs.value.logicalExpressionNode) = (yystack_[2].value.logicalExpressionNode); }
-#line 600 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 611 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
-  case 34:
-#line 158 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+  case 24:
+#line 161 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                    { (yylhs.value.logicalExpressionNode) = (yystack_[2].value.logicalExpressionNode); }
+#line 617 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+    break;
+
+  case 35:
+#line 180 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                    { (yylhs.value.returnExpressionNode) = (yystack_[2].value.returnExpressionNode); }
-#line 606 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 623 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
 
-#line 610 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 627 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
             default:
               break;
@@ -783,117 +800,120 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -52;
+  const signed char parser::yypact_ninf_ = -61;
 
   const signed char parser::yytable_ninf_ = -1;
 
   const signed char
   parser::yypact_[] =
   {
-      11,    -6,    25,    -2,   -52,   -19,   -10,   -52,    19,    -6,
-      -9,    -5,   -52,   -52,   -52,     6,   -52,   -52,   -52,     7,
-      20,    21,   -52,     8,     8,   -52,   -52,   -52,   -52,    26,
-     -52,    -1,   -52,    33,    19,    22,    23,    24,    32,   -52,
-     -52,   -52,   -52,    34,    -6,    35,   -52,     3,    13,    36,
-     -15,   -52,   -52,    45,     4,    37,    43,    38,    39,   -52,
-      19,     4,    31,   -52,    14,    49,    46,   -52,    50,    51,
-     -52,   -52,    19,    19,    19,    19,    19,    19,     4,     4,
-      41,    54,    63,    65,   -52,   -52,   -52,   -52,   -52,   -52,
-     -52,    76,    64,   -52,   -52,   -52,    19,    60,    37,   -52
+      18,   -19,   -19,     9,    -2,   -61,   -61,   -15,    -4,    32,
+     -61,    -8,    -6,    10,   -61,   -61,   -61,    23,   -61,   -61,
+     -61,    29,    25,    26,   -61,    31,    31,   -19,   -61,   -61,
+     -61,   -61,    34,   -61,   -61,    35,    -8,    19,    33,    36,
+      37,   -61,   -61,   -61,   -61,   -61,    38,    39,   -61,     7,
+      45,    46,   -16,   -61,    43,    -1,    40,    28,    41,    42,
+     -61,    -8,    -1,    30,   -61,     4,    47,    49,   -61,    52,
+      53,   -61,   -61,    -8,    -8,    -8,    -8,    -8,    -8,    -1,
+      -1,    50,    56,    65,    51,   -61,   -61,   -61,   -61,   -61,
+     -61,   -61,    64,    66,   -61,   -61,   -61,    -8,    61,    40,
+     -61
   };
 
   const signed char
   parser::yydefact_[] =
   {
-       0,     0,     0,     0,     4,     0,    10,     1,     0,     0,
-       0,     0,     2,     3,     5,     9,     7,     6,     8,     0,
-       0,     0,    20,     0,     0,    44,    42,    43,    41,    40,
-      35,    38,    33,     0,     0,     0,     0,     0,     0,    13,
-      14,    12,    11,     0,     0,     0,    34,     0,     0,     0,
-       0,    45,    39,     0,     0,     0,     0,     0,     0,    17,
-       0,     0,     0,    25,    21,     0,     0,    15,     0,     0,
-      32,    24,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    28,    29,    26,    27,    30,    31,
-      22,    23,     0,    16,    18,    19,     0,    37,     0,    36
+       0,     0,     0,     0,     0,     4,     5,     0,    11,    39,
+       1,     0,     0,     0,     2,     3,     6,    10,     8,     7,
+       9,     0,     0,     0,    21,     0,     0,     0,    45,    43,
+      44,    42,    41,    36,    34,     0,     0,     0,     0,     0,
+       0,    14,    15,    13,    12,    40,     0,     0,    35,     0,
+       0,     0,     0,    46,     0,     0,     0,     0,     0,     0,
+      18,     0,     0,     0,    26,    22,     0,     0,    16,     0,
+       0,    33,    25,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    29,    30,    27,    28,    31,
+      32,    23,    24,     0,    17,    19,    20,     0,    38,     0,
+      37
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -52,   -52,   -52,    86,    66,    -7,   -52,    61,   -52,    -8,
-     -52,   -52,   -52,   -52,   -52,   -51,    -4
+     -61,   -61,   -61,    86,    67,    14,   -61,    82,   -61,   -11,
+      88,   -61,   -61,   -61,   -61,   -60,    -5
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-      -1,     2,     3,     4,    39,     6,    23,    24,    15,    62,
-      16,    17,    18,    63,    56,    64,    66
+      -1,     3,     4,     5,    41,     8,    25,    26,    17,    63,
+       6,    19,    20,    64,    57,    65,    67
   };
 
   const signed char
   parser::yytable_[] =
   {
-      30,     1,    31,     8,     9,    10,    11,    54,    35,    20,
-      71,    21,    22,    59,     1,    61,    40,    42,    20,    19,
-      21,     5,    12,    78,    79,     7,    46,    90,    91,    32,
-      35,    13,    34,    33,    55,    38,    57,    52,    25,    26,
-      27,    28,    29,    72,    73,    74,    75,    76,    77,    36,
-      37,    43,    70,    25,    26,    27,    28,    29,    45,    58,
-      47,    48,    49,    60,    84,    85,    86,    87,    88,    89,
-      50,    67,    51,    53,    80,    65,    68,    69,    81,    92,
-      82,    83,    93,    94,    95,    78,    98,    96,    97,    14,
-      41,     0,    44,     0,    99
+      33,     1,    72,    11,     2,    12,    13,    37,     7,    10,
+      62,    55,    60,    79,    80,    22,     9,    23,    24,    91,
+      92,     1,    14,    21,     2,    48,    28,    29,    30,    31,
+      32,    15,    34,    28,    29,    30,    31,    32,    56,    42,
+      44,    45,    73,    74,    75,    76,    77,    78,    35,    36,
+      71,    22,    37,    23,    38,    39,    68,    49,    40,    46,
+      47,    61,    85,    86,    87,    88,    89,    90,    58,    59,
+      96,    50,    81,    79,    51,    52,    53,    54,    66,    69,
+      70,    82,    83,    84,    94,    95,    98,    99,    93,    97,
+      16,    27,    18,    43,   100
   };
 
   const signed char
   parser::yycheck_[] =
   {
-       8,     3,     9,     5,     6,     7,     8,     4,    23,    19,
-      61,    21,    22,    28,     3,    11,    23,    24,    19,    38,
-      21,    27,    24,     9,    10,     0,    34,    78,    79,    38,
-      23,    33,    26,    38,    31,    27,    23,    44,    34,    35,
-      36,    37,    38,    12,    13,    14,    15,    16,    17,    29,
-      29,    25,    60,    34,    35,    36,    37,    38,    25,    23,
-      38,    38,    38,    18,    72,    73,    74,    75,    76,    77,
-      38,    28,    38,    38,    25,    38,    38,    38,    32,    38,
-      30,    30,    28,    20,    19,     9,    26,    23,    96,     3,
-      24,    -1,    31,    -1,    98
+      11,     3,    62,     5,     6,     7,     8,    23,    27,     0,
+      11,     4,    28,     9,    10,    19,     2,    21,    22,    79,
+      80,     3,    24,    38,     6,    36,    34,    35,    36,    37,
+      38,    33,    38,    34,    35,    36,    37,    38,    31,    25,
+      26,    27,    12,    13,    14,    15,    16,    17,    38,    26,
+      61,    19,    23,    21,    29,    29,    28,    38,    27,    25,
+      25,    18,    73,    74,    75,    76,    77,    78,    23,    23,
+      19,    38,    25,     9,    38,    38,    38,    38,    38,    38,
+      38,    32,    30,    30,    28,    20,    97,    26,    38,    23,
+       4,     9,     4,    26,    99
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     3,    40,    41,    42,    27,    44,     0,     5,     6,
-       7,     8,    24,    33,    42,    47,    49,    50,    51,    38,
-      19,    21,    22,    45,    46,    34,    35,    36,    37,    38,
-      48,    44,    38,    38,    26,    23,    29,    29,    27,    43,
-      44,    43,    44,    25,    46,    25,    48,    38,    38,    38,
-      38,    38,    44,    38,     4,    31,    53,    23,    23,    28,
-      18,    11,    48,    52,    54,    38,    55,    28,    38,    38,
-      48,    54,    12,    13,    14,    15,    16,    17,     9,    10,
-      25,    32,    30,    30,    48,    48,    48,    48,    48,    48,
-      54,    54,    38,    28,    20,    19,    23,    48,    26,    55
+       0,     3,     6,    40,    41,    42,    49,    27,    44,    44,
+       0,     5,     7,     8,    24,    33,    42,    47,    49,    50,
+      51,    38,    19,    21,    22,    45,    46,    46,    34,    35,
+      36,    37,    38,    48,    38,    38,    26,    23,    29,    29,
+      27,    43,    44,    43,    44,    44,    25,    25,    48,    38,
+      38,    38,    38,    38,    38,     4,    31,    53,    23,    23,
+      28,    18,    11,    48,    52,    54,    38,    55,    28,    38,
+      38,    48,    54,    12,    13,    14,    15,    16,    17,     9,
+      10,    25,    32,    30,    30,    48,    48,    48,    48,    48,
+      48,    54,    54,    38,    28,    20,    19,    23,    48,    26,
+      55
   };
 
   const signed char
   parser::yyr1_[] =
   {
        0,    39,    40,    40,    41,    41,    41,    41,    41,    41,
-      42,    42,    42,    42,    42,    44,    44,    43,    46,    46,
-      45,    53,    54,    54,    54,    54,    52,    52,    52,    52,
-      52,    52,    50,    51,    47,    47,    55,    55,    49,    49,
-      48,    48,    48,    48,    48,    48
+      41,    42,    42,    42,    42,    42,    44,    44,    43,    46,
+      46,    45,    53,    54,    54,    54,    54,    52,    52,    52,
+      52,    52,    52,    50,    51,    47,    47,    55,    55,    49,
+      49,    48,    48,    48,    48,    48,    48
   };
 
   const signed char
   parser::yyr2_[] =
   {
-       0,     2,     2,     2,     1,     2,     2,     2,     2,     2,
-       2,     4,     4,     4,     4,     6,     8,     3,     7,     7,
-       1,     2,     3,     3,     2,     1,     3,     3,     3,     3,
-       3,     3,     6,     2,     3,     2,     7,     5,     2,     4,
-       1,     1,     1,     1,     1,     3
+       0,     2,     2,     2,     1,     1,     2,     2,     2,     2,
+       2,     2,     4,     4,     4,     4,     6,     8,     3,     7,
+       7,     1,     2,     3,     3,     2,     1,     3,     3,     3,
+       3,     3,     3,     6,     2,     3,     2,     7,     5,     2,
+       4,     1,     1,     1,     1,     1,     3
   };
 
 
@@ -905,8 +925,8 @@ namespace yy {
   {
   "$end", "error", "$undefined", "MATCH_KEYWORD", "WHERE_KEYWORD",
   "RETURN_KEYWORD", "CREATE_KEYWORD", "DELETE_KEYWORD", "SET_KEYWORD",
-  "AND_KEYMORD", "OR_KEYWORD", "NOT_KEYWORD", "GREATER_CMP",
-  "GREATER_OR_EUQAL_CMP", "LESS_CMP", "LESS_OR_EQUAL_CMP", "EQUAL_CMP",
+  "AND_KEYWORD", "OR_KEYWORD", "NOT_KEYWORD", "GREATER_CMP",
+  "GREATER_OR_EQUAL_CMP", "LESS_CMP", "LESS_OR_EQUAL_CMP", "EQUAL_CMP",
   "CONTAINS_OP", "ASSIGNMENT", "DASH", "RIGHT_ARROW", "LEFT_ARROW",
   "DOUBLE_DASH", "COLON", "SCOLON", "PERIOD", "COMMA", "LPAR", "RPAR",
   "LBRACKET", "RBRACKET", "LBRACE", "RBRACE", "END_OF_FILE",
@@ -922,11 +942,11 @@ namespace yy {
   const unsigned char
   parser::yyrline_[] =
   {
-       0,   103,   103,   104,   106,   107,   108,   109,   110,   111,
-     114,   115,   116,   117,   118,   121,   122,   125,   128,   129,
-     132,   135,   138,   139,   140,   141,   144,   145,   146,   147,
-     148,   149,   152,   155,   158,   159,   161,   162,   164,   165,
-     167,   168,   169,   170,   171,   172
+       0,   124,   124,   125,   127,   128,   129,   130,   131,   132,
+     133,   136,   137,   138,   139,   140,   143,   144,   147,   150,
+     151,   154,   157,   160,   161,   162,   163,   166,   167,   168,
+     169,   170,   171,   174,   177,   180,   181,   183,   184,   186,
+     187,   189,   190,   191,   192,   193,   194
   };
 
   // Print the state stack on the debug stream.
@@ -1009,7 +1029,17 @@ namespace yy {
   }
 
 } // yy
-#line 1013 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 1033 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
-#line 174 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 196 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
+
+namespace yy {
+
+parser::token_type yylex(parser::semantic_type* yylval,                         
+                         ParserDriver* driver)
+{
+  return driver->yylex(yylval);
+}
+
+}

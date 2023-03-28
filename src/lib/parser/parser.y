@@ -6,16 +6,37 @@
 
 %skeleton "lalr1.cc"
 
+%param {ParserDriver *driver}
+
 %code requires 
 {
-#include "../ast.hpp"
 #include <string>
+
+#include "../ast.hpp"
+
+namespace yy { class ParserDriver; }
+
+}
+
+%code
+{
+#include "../driver.hpp"
+
+namespace yy
+{
+
+void parser::error(const std::string&){}
+
+parser::token_type yylex(parser::semantic_type* yylval,                         
+                         ParserDriver* driver);
+
+}
 }
 
 %union
 {
     const char               *name;
-    std::string              *string;
+    const char               *string;
     INode                    *iNode;
     Request                  *request;
     ExpressionNode           *expressionNode;
@@ -43,11 +64,11 @@
     CREATE_KEYWORD
     DELETE_KEYWORD
     SET_KEYWORD
-    AND_KEYMORD
+    AND_KEYWORD
     OR_KEYWORD
     NOT_KEYWORD
     GREATER_CMP
-    GREATER_OR_EUQAL_CMP
+    GREATER_OR_EQUAL_CMP
     LESS_CMP
     LESS_OR_EQUAL_CMP
     EQUAL_CMP
@@ -94,7 +115,7 @@
 %nterm <attributeListNode>        ATTRIBUTE_LIST
 
 %left OR_KEYWORD
-%left AND_KEYMORD
+%left AND_KEYWORD
 %left NOT_KEYWORD
 
 %start REQUEST
@@ -104,6 +125,7 @@ REQUEST: REQUEST_B SCOLON
        | REQUEST_B END_OF_FILE
 
 REQUEST_B: MATCH_EXPRESSION
+         | CREATE_EXPRESSION
          | REQUEST_B MATCH_EXPRESSION
          | REQUEST_B SET_EXPRESSION
          | REQUEST_B CREATE_EXPRESSION
@@ -135,7 +157,7 @@ ANY_RELATION_MATCH: DOUBLE_DASH
 PREDICATE: WHERE_KEYWORD LOGICAL_EXPRESSION
 ;
 
-LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYMORD LOGICAL_EXPRESSION
+LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYWORD LOGICAL_EXPRESSION
                   | LOGICAL_EXPRESSION OR_KEYWORD LOGICAL_EXPRESSION
                   | NOT_KEYWORD LOGICAL_EXPRESSION
                   | FILTER
@@ -144,7 +166,7 @@ LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYMORD LOGICAL_EXPRESSION
 FILTER: VALUE LESS_CMP VALUE
       | VALUE LESS_OR_EQUAL_CMP VALUE
       | VALUE GREATER_CMP VALUE
-      | VALUE GREATER_OR_EUQAL_CMP VALUE
+      | VALUE GREATER_OR_EQUAL_CMP VALUE
       | VALUE EQUAL_CMP VALUE
       | VALUE CONTAINS_OP VALUE
 ;
@@ -172,3 +194,13 @@ VALUE: NAME
      | NAME PERIOD NAME
 ;
 %%
+
+namespace yy {
+
+parser::token_type yylex(parser::semantic_type* yylval,                         
+                         ParserDriver* driver)
+{
+  return driver->yylex(yylval);
+}
+
+}

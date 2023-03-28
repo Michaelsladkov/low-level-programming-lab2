@@ -18,11 +18,13 @@ flex_target(lexer
 bison_target(parser
   ${PARSER_GRAMMAR}
   ${PARSER_OUT_DIR}/parser.cpp
-  DEFINES_FILE ${PARSER_OUT_DIR}/logic.tab.hpp)
+  DEFINES_FILE ${PARSER_OUT_DIR}/parser.tab.hpp)
 
 add_flex_bison_dependency(lexer parser)
 
 add_library(${PROJECT_NAME} STATIC
+            ast_printer.cpp
             ${BISON_parser_OUTPUTS}
             ${FLEX_lexer_OUTPUTS}
 )
+target_include_directories(${PROJECT_NAME} PUBLIC ${PARSER_OUT_DIR})

@@ -5,4 +5,7 @@ set(CMAKE_C++_COMPILER clang++)
 project(msladkov-llp-lab2 LANGUAGES CXX)
 
 
+
+set(CMAKE_CXX_STANDARD 17)
+
 add_subdirectory(src)
