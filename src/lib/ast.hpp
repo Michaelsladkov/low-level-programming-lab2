@@ -2,11 +2,16 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 class INode {
 public:
     virtual ~INode() {}
     virtual void print(int level, std::ostream out) const = 0;
+};
+
+class ExpressionNode : public INode {
+
 };
 
 class ValueNode : public INode {
@@ -289,22 +294,22 @@ public:
     }
 };
 
-class MatchQuerryNode : public INode {
+class MatchExpressionNode : public ExpressionNode {
     VariableMatchNode *LeftNode;
     VariableMatchNode *RightNode;
     RelationMatchNode *Relation;
 public:
-    MatchQuerryNode(VariableMatchNode *Node) {
+    MatchExpressionNode(VariableMatchNode *Node) {
         LeftNode = Node;
         RightNode = nullptr;
         Relation = nullptr;
     }
-    MatchQuerryNode(VariableMatchNode *Left, VariableMatchNode *Right) {
+    MatchExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right) {
         LeftNode = Left;
         RightNode = Right;
         Relation = new RelationMatchNode("", "", ANY);
     }
-    MatchQuerryNode(VariableMatchNode *Left, VariableMatchNode *Right, RelationMatchNode *Rel) {
+    MatchExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right, RelationMatchNode *Rel) {
         LeftNode = Left;
         RightNode = Right;
         Relation = Rel;
@@ -319,9 +324,116 @@ public:
     const RelationMatchNode* getRelationMatchNode() const {
         return Relation;
     }
-    virtual ~MatchQuerryNode() {
+    virtual ~MatchExpressionNode() {
         delete LeftNode;
         delete RightNode;
         delete Relation;
+    }
+};
+
+class ReturnExpressionNode : public ExpressionNode {
+    std::vector<ValueNode*> Values;
+public:
+    virtual void print(int level, std::ostream out) const override;
+    void addElement(ValueNode* Val) {
+        Values.push_back(Val);
+    }
+    const std::vector<ValueNode*>& getValues() const {
+        return Values;
+    }
+    virtual ~ReturnExpressionNode() override {
+        for (size_t i = 0; i < Values.size(); ++i) {
+            ValueNode* v = *(Values.end());
+            Values.pop_back();
+            delete v;
+        }
+    }
+};
+
+class SetExpressionNode : public ExpressionNode {
+    VariableValueNode *Dest;
+    ValueNode *Src;
+public:
+    SetExpressionNode(VariableValueNode *Destination, ValueNode *Source) {
+        Dest = Destination;
+        Src = Source;
+    }
+    const VariableValueNode* getDestination() const {
+        return Dest;
+    }
+    const ValueNode* getSource() const {
+        return Src;
+    }
+    virtual void print(int level, std::ostream out) const override;
+};
+
+class DeleteExpressionNode : public ExpressionNode {
+    std::string VariableName;
+public:
+    DeleteExpressionNode(const char* Name) {
+        VariableName = std::string(Name);
+    }
+    virtual void print(int level, std::ostream out) const override;
+    const std::string& getVariableName() const {
+        return VariableName;
+    }
+};
+
+class CreateExpressionNode : public ExpressionNode {
+    VariableMatchNode *LeftNode;
+    VariableMatchNode *RightNode;
+    RelationMatchNode *Relation;
+public:
+    CreateExpressionNode(VariableMatchNode *Node) {
+        LeftNode = Node;
+        RightNode = nullptr;
+        Relation = nullptr;
+    }
+    CreateExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right) {
+        LeftNode = Left;
+        RightNode = Right;
+        Relation = new RelationMatchNode("", "", ANY);
+    }
+    CreateExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right, RelationMatchNode *Rel) {
+        LeftNode = Left;
+        RightNode = Right;
+        Relation = Rel;
+    }
+    virtual void print(int level, std::ostream out) const override;
+    const VariableMatchNode* getRightMatchNode() const {
+        return RightNode;
+    }
+    const VariableMatchNode* getLeftMatchNode() const {
+        return LeftNode;
+    }
+    const RelationMatchNode* getRelationMatchNode() const {
+        return Relation;
+    }
+    virtual ~CreateExpressionNode() override {
+        delete LeftNode;
+        delete RightNode;
+        delete Relation;
+    }
+};
+
+class Request : public INode {
+    std::vector<ExpressionNode*> Expressions;
+public:
+    virtual void print(int level, std::ostream out) const override;
+    Request(ExpressionNode *Expr) {
+        Expressions.push_back(Expr);
+    }
+    void addExpr(ExpressionNode* Expr) {
+        Expressions.push_back(Expr);
+    }
+    const std::vector<ExpressionNode*>& getExpressions() const {
+        return Expressions;
+    }
+    virtual ~Request() override {
+        for (size_t i = 0; i < Expressions.size(); ++i) {
+            ExpressionNode* e = *(Expressions.end());
+            Expressions.pop_back();
+            delete e;
+        }
     }
 };
