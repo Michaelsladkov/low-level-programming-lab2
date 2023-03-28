@@ -8,19 +8,32 @@
 
 %code requires 
 {
+#include "ast.hpp"
 #include <string>
 }
 
 %union
 {
-    const char  *name;
-    std::string *string;
-    INode       *iNode;
-    ReturnList  *returnList;
-    Value       *Value;
-    int         integer;
-    float       real;
-    bool        boolean;
+    const char               *name;
+    std::string              *string;
+    INode                    *iNode;
+    Request                  *request;
+    ExpressionNode           *expressionNode;
+    MatchExpressionNode      *matchExpressionNode;
+    CreateExpressionNode     *createExpressionNode;
+    SetExpressionNode        *setExpressionNode;
+    ReturnExpressionNode     *returnExpressionNode;
+    DeleteExpressionNode     *deleteExpressionNode;
+    VariableMatchNode        *variableMatchNode;
+    RelationMatchNode        *relationMatchNode;
+    ValueNode                *Value;
+    FilterNode               *filterNode;
+    PredicateNode            *predicateNode;
+    LogicalExpressionNode    *logicalExpressionNode;
+    AttributeListNode        *attributeListNode;
+    int                      integer;
+    float                    real;
+    bool                     boolean;
 }
 
 %token
@@ -57,30 +70,28 @@
     END_OF_FILE
 ;
 
-%token <string>  STRING_LITERAL
-%token <integer> INT_LITERAL
-%token <real>    FLOAT_LITERAL
-%token <boolean> BOOL_LITERAL
-%token <name>    NAME
+%token <string>     STRING_LITERAL
+%token <integer>    INT_LITERAL
+%token <real>       FLOAT_LITERAL
+%token <boolean>    BOOL_LITERAL
+%token <name>       NAME
 
-%nterm <iNode>       REQUEST
-%nterm <iNode>       REQUEST_B
-%nterm <iNode>       MATCH_QUERRY
-%nterm <iNode>       ANY_VARIABLE_MATCH
-%nterm <iNode>       VARIABLE_MATCH
-%nterm <iNode>       ANY_RELATION_MATCH
-%nterm <iNode>       RELATION_MATCH
-%nterm <iNode>       MATCH_QUERRY
-%nterm <iNode>       RETURN_EXPRESSION
-%nterm <returnList>  RETURN_LIST
-%nterm <Value>       VALUE
-%nterm <iNode>       CREATE_QUERRY
-%nterm <iNode>       SET_EXPRESSION
-%nterm <iNode>       DELETE_EXPRESSION
-%nterm <iNode>       FILTER
-%nterm <iNode>       FILTER_CHAIN
-%nterm <iNode>       ATTRIBUTE_LIST
-%nterm <iNode>       ATTRIBUTE
+%nterm <request>                  REQUEST
+%nterm <request>                  REQUEST_B
+%nterm <matchExpressionNode>      MATCH_EXPRESSION
+%nterm <variableMatchNode>        ANY_VARIABLE_MATCH
+%nterm <variableMatchNode>        VARIABLE_MATCH
+%nterm <relationMatchNode>        ANY_RELATION_MATCH
+%nterm <relationMatchNode>        RELATION_MATCH
+%nterm <returnExpressionNode>     RETURN_EXPRESSION
+%nterm <Value>                    VALUE
+%nterm <createExpressionNode>     CREATE_EXPRESSION 
+%nterm <setExpressionNode>        SET_EXPRESSION
+%nterm <deleteExpressionNode>     DELETE_EXPRESSION
+%nterm <filterNode>               FILTER
+%nterm <predicateNode>            PREDICATE
+%nterm <logicalExpressionNode>    LOGICAL_EXPRESSION
+%nterm <attributeListNode>        ATTRIBUTE_LIST
 
 %left OR_KEYWORD
 %left AND_KEYMORD
@@ -92,22 +103,22 @@
 REQUEST: REQUEST_B SCOLON
        | REQUEST_B END_OF_FILE
 
-REQUEST_B: MATCH_QUERRY
-         | REQUEST_B FILTER_CHAIN
+REQUEST_B: MATCH_EXPRESSION
+         | REQUEST_B MATCH_EXPRESSION
          | REQUEST_B SET_EXPRESSION
-         | REQUEST_B CREATE_QUERRY
+         | REQUEST_B CREATE_EXPRESSION
          | REQUEST_B DELETE_EXPRESSION
          | REQUEST_B RETURN_EXPRESSION
 ;
 
-MATCH_QUERRY: MATCH_KEYWORD VARIABLE_MATCH
-            | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH
-            | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH ANY_VARIABLE_MATCH
-            | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH ANY_VARIABLE_MATCH
-            | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH
+MATCH_EXPRESSION: MATCH_KEYWORD VARIABLE_MATCH
+                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH
+                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH ANY_VARIABLE_MATCH
+                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH ANY_VARIABLE_MATCH
+                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH
 ;
 
-VARIABLE_MATCH: LPAR NAME COLON NAME FILTER_CHAIN RPAR
+VARIABLE_MATCH: LPAR NAME COLON NAME PREDICATE RPAR
               | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR
 ;
 
@@ -121,11 +132,13 @@ RELATION_MATCH: DASH LBRACKET NAME COLON NAME RBRACKET RIGHT_ARROW
 ANY_RELATION_MATCH: DOUBLE_DASH
 ;
 
-FILTER_CHAIN: WHERE_KEYWORD FILTER
-            | WHERE_KEYWORD NOT_KEYWORD FILTER
-            | FILTER_CHAIN OR_KEYWORD FILTER
-            | FILTER_CHAIN AND_KEYMORD FILTER_CHAIN
-            | FILTER_CHAIN NOT_KEYWORD FILTER
+PREDICATE: WHERE_KEYWORD LOGICAL_EXPRESSION
+;
+
+LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYMORD LOGICAL_EXPRESSION
+                  | LOGICAL_EXPRESSION OR_KEYWORD LOGICAL_EXPRESSION
+                  | NOT_KEYWORD LOGICAL_EXPRESSION
+                  | FILTER
 ;
 
 FILTER: VALUE LESS_CMP VALUE
@@ -148,8 +161,8 @@ RETURN_EXPRESSION: RETURN_EXPRESSION COMMA VALUE
 ATTRIBUTE_LIST: NAME PERIOD NAME COLON VALUE COMMA ATTRIBUTE_LIST
               | NAME PERIOD NAME COLON VALUE
 
-CREATE_QUERRY: CREATE_KEYWORD VARIABLE_MATCH
-             | CREATE_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH
+CREATE_EXPRESSION: CREATE_KEYWORD VARIABLE_MATCH
+                 | CREATE_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH
 
 VALUE: NAME
      | BOOL_LITERAL
