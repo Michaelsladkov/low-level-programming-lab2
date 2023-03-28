@@ -47,13 +47,15 @@
 #line 12 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
 #include <string>
-
+#include <iostream>
 #include "../ast.hpp"
+
+#define YYDEBUG 1
 
 namespace yy { class ParserDriver; }
 
 
-#line 57 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 59 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 # include <cstdlib> // std::abort
@@ -182,7 +184,7 @@ namespace yy { class ParserDriver; }
 #endif
 
 namespace yy {
-#line 186 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 188 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 
@@ -195,12 +197,12 @@ namespace yy {
     /// Symbol semantic values.
     union semantic_type
     {
-#line 37 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 39 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
-    const char               *name;
-    const char               *string;
+    std::string               *name;
+    std::string               *string;
     INode                    *iNode;
-    Request                  *request;
+    RequestNode              *requestNode;
     ExpressionNode           *expressionNode;
     MatchExpressionNode      *matchExpressionNode;
     CreateExpressionNode     *createExpressionNode;
@@ -209,7 +211,7 @@ namespace yy {
     DeleteExpressionNode     *deleteExpressionNode;
     VariableMatchNode        *variableMatchNode;
     RelationMatchNode        *relationMatchNode;
-    ValueNode                *Value;
+    ValueNode                *value;
     FilterNode               *filterNode;
     PredicateNode            *predicateNode;
     LogicalExpressionNode    *logicalExpressionNode;
@@ -218,7 +220,7 @@ namespace yy {
     float                    real;
     bool                     boolean;
 
-#line 222 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 224 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
     };
 #else
@@ -730,7 +732,7 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 94,     ///< Last index in yytable_.
+      yylast_ = 92,     ///< Last index in yytable_.
       yynnts_ = 17,  ///< Number of nonterminal symbols.
       yyfinal_ = 10, ///< Termination state number.
       yyntokens_ = 39  ///< Number of tokens.
@@ -743,7 +745,7 @@ namespace yy {
 
 
 } // yy
-#line 747 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 749 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 

@@ -19,32 +19,39 @@ class ValueNode : public INode {
 };
 
 class VariableValueNode : public ValueNode {
-    std::string VariableName;
-    std::string FieldName;
+    std::string* VariableName;
+    std::string* FieldName;
 public:
-    VariableValueNode(const char *VName, const char *FName) {
-        VariableName = std::string(VName);
-        FieldName = std::string(FName);
+    VariableValueNode(std::string *VName, std::string *FName) {
+        VariableName = VName;
+        FieldName = FName;
     }
-    const std::string& getVariableName() {
+    const std::string* getVariableName() {
         return VariableName;
     }
-    const std::string& getFieldName() {
+    const std::string* getFieldName() {
         return FieldName;
     }
     virtual void print(int level, std::ostream& out) const override;
+    virtual ~VariableValueNode() override {
+        delete VariableName;
+        delete FieldName;
+    }
 };
 
 class StringLiteralNode : public ValueNode {
-    std::string Value;
+    std::string *Value;
 public:
-    StringLiteralNode(const char* Val) {
-        Value = std::string(Val);
+    StringLiteralNode(std::string *Val) {
+        Value = Val;
     }
-    const std::string& getValue() const {
+    const std::string* getValue() const {
         return Value;
     }
     virtual void print(int level, std::ostream& out) const override;
+    virtual ~StringLiteralNode() override {
+        delete Value;
+    }
 };
 
 class BoolLiteralNode : public ValueNode {
@@ -97,7 +104,7 @@ class FilterNode : public INode {
     ValueNode *LHS;
     FilterCheckOperation Operation;
 public:
-    FilterNode(ValueNode *Right, ValueNode *Left, FilterCheckOperation Op) {
+    FilterNode(ValueNode *Left, ValueNode *Right, FilterCheckOperation Op) {
         RHS = Right;
         LHS = Left;
         Operation = Op;
@@ -200,9 +207,10 @@ public:
 class AttributeListNode : public INode {
     std::unordered_map<std::string, ValueNode*> AttrList;
 public:
-    bool addAttribute(const char* name, ValueNode* Value) {
-        if (AttrList.count(name)) return false;
-        AttrList[name] = Value;
+    bool addAttribute(std::string* name, ValueNode* Value) {
+        if (AttrList.count(*name)) return false;
+        AttrList[*name] = Value;
+        delete name;
         return true;
     }
     const std::unordered_map<std::string, ValueNode*>& getAttributeList() const {
@@ -218,26 +226,30 @@ public:
 
 class VariableMatchNode : public INode {
 protected:
-    std::string VariableName;
-    std::string SchemeName;
+    std::string *VariableName;
+    std::string *SchemeName;
 public:
-    VariableMatchNode(const char* Var, const char* Scheme) {
-        VariableName = std::string(Var);
-        SchemeName = std::string(Scheme);
+    VariableMatchNode(std::string *Var, std::string *Scheme) {
+        VariableName = Var;
+        SchemeName = Scheme;
     }
-    const std::string& getVariableName() const {
+    const std::string* getVariableName() const {
         return VariableName;
     }
-    const std::string& getSchemeName() const {
+    const std::string* getSchemeName() const {
         return SchemeName;
     }
     virtual void print(int level, std::ostream& out) const override;
+    virtual ~VariableMatchNode() override {
+        delete VariableName;
+        delete SchemeName;
+    }
 };
 
 class VariablePatternMatchNode : public VariableMatchNode {
     AttributeListNode *Pattern;
 public:
-    VariablePatternMatchNode(const char* Var, const char* Scheme, AttributeListNode* AttrList) :
+    VariablePatternMatchNode(std::string *Var, std::string *Scheme, AttributeListNode* AttrList) :
         VariableMatchNode(Var, Scheme) {
         Pattern = AttrList;
     }
@@ -253,7 +265,7 @@ public:
 class VariableFilterMatchNode : public VariableMatchNode {
     PredicateNode* Predicate;
 public:
-    VariableFilterMatchNode(const char* Var, const char* Scheme, PredicateNode* Filters) :
+    VariableFilterMatchNode(std::string *Var, std::string *Scheme, PredicateNode* Filters) :
         VariableMatchNode(Var, Scheme) {
         Predicate = Filters;
     }
@@ -273,24 +285,28 @@ enum RelationDirection {
 };
 
 class RelationMatchNode : public INode {
-    std::string VariableName;
-    std::string RelationName;
+    std::string *VariableName;
+    std::string *RelationName;
     RelationDirection Direction;
 public:
-    RelationMatchNode(const char* Var, const char* Rel, RelationDirection Dir) {
-        VariableName = std::string(Var);
-        RelationName = std::string(Rel);
+    RelationMatchNode(std::string *Var, std::string *Rel, RelationDirection Dir) {
+        VariableName = Var;
+        RelationName = Rel;
         Direction = Dir;
     }
     virtual void print(int level, std::ostream& out) const override;
-    const std::string& getVariableName() const {
+    const std::string* getVariableName() const {
         return VariableName;
     }
-    const std::string& getRelationName() const {
+    const std::string* getRelationName() const {
         return RelationName;
     }
     RelationDirection getDirection() const {
         return Direction;
+    }
+    virtual ~RelationMatchNode() override {
+        delete VariableName;
+        delete RelationName;
     }
 };
 
@@ -307,7 +323,7 @@ public:
     MatchExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right) {
         LeftNode = Left;
         RightNode = Right;
-        Relation = new RelationMatchNode("", "", ANY);
+        Relation = new RelationMatchNode(new std::string(""), new std::string(""), ANY);
     }
     MatchExpressionNode(VariableMatchNode *Left, VariableMatchNode *Right, RelationMatchNode *Rel) {
         LeftNode = Left;
@@ -368,14 +384,17 @@ public:
 };
 
 class DeleteExpressionNode : public ExpressionNode {
-    std::string VariableName;
+    std::string* VariableName;
 public:
-    DeleteExpressionNode(const char* Name) {
-        VariableName = std::string(Name);
+    DeleteExpressionNode(std::string* Name) {
+        VariableName = Name;
     }
     virtual void print(int level, std::ostream& out) const override;
-    const std::string& getVariableName() const {
+    const std::string* getVariableName() const {
         return VariableName;
+    }
+    virtual ~DeleteExpressionNode() override {
+        delete VariableName;
     }
 };
 
@@ -411,11 +430,11 @@ public:
     }
 };
 
-class Request : public INode {
+class RequestNode : public INode {
     std::vector<ExpressionNode*> Expressions;
 public:
     virtual void print(int level, std::ostream& out) const override;
-    Request(ExpressionNode *Expr) {
+    RequestNode(ExpressionNode *Expr) {
         Expressions.push_back(Expr);
     }
     void addExpr(ExpressionNode* Expr) {
@@ -424,7 +443,7 @@ public:
     const std::vector<ExpressionNode*>& getExpressions() const {
         return Expressions;
     }
-    virtual ~Request() override {
+    virtual ~RequestNode() override {
         for (size_t i = 0; i < Expressions.size(); ++i) {
             ExpressionNode* e = *(Expressions.end());
             Expressions.pop_back();

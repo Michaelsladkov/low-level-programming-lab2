@@ -12,7 +12,7 @@ namespace yy{
 
 class ParserDriver {
     FlexLexer *plex_;
-    Request *result;
+    RequestNode *result;
 
 public:
     ParserDriver(FlexLexer *plex) : plex_(plex) {}
@@ -34,22 +34,23 @@ public:
             yylval->boolean = value;
         }
         if (tt == yy::parser::token_type::STRING_LITERAL) {
-            yylval->string = TokenStr;
+            yylval->string = new std::string(TokenStr);
         }
         if (tt == yy::parser::token_type::NAME) {
-            yylval->name == TokenStr;
+            yylval->name = new std::string(TokenStr);
         }
         return tt;
     }
 
     bool parse() {
         parser parser(this);
+        parser.set_debug_level(1);
         std::cout << "begin parsing via parser" << std::endl;
         bool res = parser.parse();
         return !res;
     }
 
-    void insert(Request *v) {
+    void insert(RequestNode *v) {
         result = v;
         std::cout << "something inserted into controller" << std::endl;
     }

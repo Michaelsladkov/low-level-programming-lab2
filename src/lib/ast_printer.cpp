@@ -11,9 +11,9 @@ static void addSpaces(int level, std::ostream& out) {
 void VariableValueNode::print(int level, std::ostream& out) const {
     out << "Variable value node: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable name: " << VariableName << std::endl;
+    out << "Variable name: " << *VariableName << std::endl;
     addSpaces(level + 4, out);
-    out << "Field name: " << FieldName << std::endl;
+    out << "Field name: " << *FieldName << std::endl;
     addSpaces(level, out);
     out << "}" << std::endl;
 }
@@ -160,9 +160,9 @@ void AttributeListNode::print(int level, std::ostream& out) const {
 void VariableMatchNode::print(int level, std::ostream& out) const {
     out << "Any variable match: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable name: " << VariableName;
+    out << "Variable name: " << *VariableName << std::endl;
     addSpaces(level + 4, out);
-    out << "Scheme name: " << SchemeName;
+    out << "Scheme name: " << *SchemeName << std::endl;
     addSpaces(level, out);
     out << "}" << std::endl;
 }
@@ -170,9 +170,9 @@ void VariableMatchNode::print(int level, std::ostream& out) const {
 void VariablePatternMatchNode::print(int level, std::ostream& out) const {
     out << "Variable pattern match: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable name: " << VariableName;
+    out << "Variable name: " << *VariableName << std::endl;
     addSpaces(level + 4, out);
-    out << "Scheme name: " << SchemeName;
+    out << "Scheme name: " << (SchemeName->empty() ? "ANY" : *SchemeName) << std::endl;
     addSpaces(level + 4, out);
     out << "Pattern: ";
     Pattern->print(level + 4, out);
@@ -183,9 +183,9 @@ void VariablePatternMatchNode::print(int level, std::ostream& out) const {
 void VariableFilterMatchNode::print(int level, std::ostream& out) const {
     out << "Variable filter match: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable name: " << VariableName;
+    out << "Variable name: " << *VariableName;
     addSpaces(level + 4, out);
-    out << "Scheme name: " << SchemeName;
+    out << "Scheme name: " << *SchemeName;
     addSpaces(level + 4, out);
     out << "Filter: ";
     Predicate->print(level + 4, out);
@@ -196,9 +196,9 @@ void VariableFilterMatchNode::print(int level, std::ostream& out) const {
 void RelationMatchNode::print(int level, std::ostream& out) const {
     out << "Relation match: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable name: " << VariableName << std::endl;
+    out << "Variable name: " << (VariableName->empty() ? "ANON" : *VariableName) << std::endl;
     addSpaces(level + 4, out);
-    out << "Relation: " << (RelationName.empty() ? "ANY" : RelationName) << std::endl;
+    out << "Relation: " << (RelationName->empty() ? "ANY" : *RelationName) << std::endl;
     addSpaces(level + 4, out);
     out << "Direction: ";
     switch (Direction)
@@ -288,7 +288,7 @@ void CreateExpressionNode::print(int level, std::ostream& out) const {
     out << "}" << std::endl;
 }
 
-void Request::print(int level, std::ostream& out) const {
+void RequestNode::print(int level, std::ostream& out) const {
     out << "Request: {" << std::endl;
     for(auto e : Expressions) {
         addSpaces(level + 4, out);

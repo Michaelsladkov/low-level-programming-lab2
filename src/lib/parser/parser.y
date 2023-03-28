@@ -11,8 +11,10 @@
 %code requires 
 {
 #include <string>
-
+#include <iostream>
 #include "../ast.hpp"
+
+#define YYDEBUG 1
 
 namespace yy { class ParserDriver; }
 
@@ -35,10 +37,10 @@ parser::token_type yylex(parser::semantic_type* yylval,
 
 %union
 {
-    const char               *name;
-    const char               *string;
+    std::string               *name;
+    std::string               *string;
     INode                    *iNode;
-    Request                  *request;
+    RequestNode              *requestNode;
     ExpressionNode           *expressionNode;
     MatchExpressionNode      *matchExpressionNode;
     CreateExpressionNode     *createExpressionNode;
@@ -47,7 +49,7 @@ parser::token_type yylex(parser::semantic_type* yylval,
     DeleteExpressionNode     *deleteExpressionNode;
     VariableMatchNode        *variableMatchNode;
     RelationMatchNode        *relationMatchNode;
-    ValueNode                *Value;
+    ValueNode                *value;
     FilterNode               *filterNode;
     PredicateNode            *predicateNode;
     LogicalExpressionNode    *logicalExpressionNode;
@@ -97,15 +99,15 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %token <boolean>    BOOL_LITERAL
 %token <name>       NAME
 
-%nterm <request>                  REQUEST
-%nterm <request>                  REQUEST_B
+%nterm <requestNode>              REQUEST
+%nterm <requestNode>              REQUEST_B
 %nterm <matchExpressionNode>      MATCH_EXPRESSION
 %nterm <variableMatchNode>        ANY_VARIABLE_MATCH
 %nterm <variableMatchNode>        VARIABLE_MATCH
 %nterm <relationMatchNode>        ANY_RELATION_MATCH
 %nterm <relationMatchNode>        RELATION_MATCH
 %nterm <returnExpressionNode>     RETURN_EXPRESSION
-%nterm <Value>                    VALUE
+%nterm <value>                    VALUE
 %nterm <createExpressionNode>     CREATE_EXPRESSION 
 %nterm <setExpressionNode>        SET_EXPRESSION
 %nterm <deleteExpressionNode>     DELETE_EXPRESSION
@@ -121,77 +123,80 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %start REQUEST
 
 %%
-REQUEST: REQUEST_B SCOLON
-       | REQUEST_B END_OF_FILE
-
-REQUEST_B: MATCH_EXPRESSION
-         | CREATE_EXPRESSION
-         | REQUEST_B MATCH_EXPRESSION
-         | REQUEST_B SET_EXPRESSION
-         | REQUEST_B CREATE_EXPRESSION
-         | REQUEST_B DELETE_EXPRESSION
-         | REQUEST_B RETURN_EXPRESSION
+REQUEST: REQUEST_B SCOLON              { driver->insert($1); }
+       | REQUEST_B END_OF_FILE         { driver->insert($1); }
 ;
 
-MATCH_EXPRESSION: MATCH_KEYWORD VARIABLE_MATCH
-                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH
-                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH ANY_VARIABLE_MATCH
-                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH ANY_VARIABLE_MATCH
-                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH
+REQUEST_B: MATCH_EXPRESSION            { $$ = new RequestNode($1); }
+         | CREATE_EXPRESSION           { $$ = new RequestNode($1); }
+         | REQUEST_B MATCH_EXPRESSION  { $$ = $1; $$->addExpr($2); }
+         | REQUEST_B SET_EXPRESSION    { $$ = $1; $$->addExpr($2); }
+         | REQUEST_B CREATE_EXPRESSION { $$ = $1; $$->addExpr($2); }
+         | REQUEST_B DELETE_EXPRESSION { $$ = $1; $$->addExpr($2); }
+         | REQUEST_B RETURN_EXPRESSION { $$ = $1; $$->addExpr($2); }
 ;
 
-VARIABLE_MATCH: LPAR NAME COLON NAME PREDICATE RPAR
-              | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR
+MATCH_EXPRESSION: MATCH_KEYWORD VARIABLE_MATCH                                       { $$ = new MatchExpressionNode($2); std::cout << "parsed  varmatch\n";        }
+                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH         { $$ = new MatchExpressionNode($2, $4, $3); }
+                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH ANY_VARIABLE_MATCH     { $$ = new MatchExpressionNode($2, $4, $3); }
+                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH ANY_VARIABLE_MATCH { $$ = new MatchExpressionNode($2, $4, $3); }
+                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH     { $$ = new MatchExpressionNode($2, $4, $3); }
 ;
 
-ANY_VARIABLE_MATCH: LPAR NAME RPAR
+VARIABLE_MATCH: LPAR NAME COLON NAME PREDICATE RPAR                    { $$ = new VariableFilterMatchNode($2, $4, $5);  }
+              | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR { std::cout << "line 147 names " << $2 << " " << $4 << std::endl; $$ = new VariablePatternMatchNode($2, $4, $6); }
 ;
 
-RELATION_MATCH: DASH LBRACKET NAME COLON NAME RBRACKET RIGHT_ARROW
-              | LEFT_ARROW LBRACKET NAME COLON NAME RBRACKET DASH
+ANY_VARIABLE_MATCH: LPAR NAME RPAR { $$ = new VariableMatchNode($2, new std::string(""));  std::cout << "anyvar\n"; }
 ;
 
-ANY_RELATION_MATCH: DOUBLE_DASH
+RELATION_MATCH: DASH LBRACKET NAME COLON NAME RBRACKET RIGHT_ARROW { $$ = new RelationMatchNode($3, $5, FORWARD); }
+              | LEFT_ARROW LBRACKET NAME COLON NAME RBRACKET DASH  { $$ = new RelationMatchNode($3, $5, REVERSE); }
 ;
 
-PREDICATE: WHERE_KEYWORD LOGICAL_EXPRESSION
+ANY_RELATION_MATCH: DOUBLE_DASH { $$ = new RelationMatchNode(new std::string(""), new std::string(""), ANY); }
 ;
 
-LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYWORD LOGICAL_EXPRESSION
-                  | LOGICAL_EXPRESSION OR_KEYWORD LOGICAL_EXPRESSION
-                  | NOT_KEYWORD LOGICAL_EXPRESSION
-                  | FILTER
+PREDICATE: WHERE_KEYWORD LOGICAL_EXPRESSION { $$ = new PredicateNode($2); }
 ;
 
-FILTER: VALUE LESS_CMP VALUE
-      | VALUE LESS_OR_EQUAL_CMP VALUE
-      | VALUE GREATER_CMP VALUE
-      | VALUE GREATER_OR_EQUAL_CMP VALUE
-      | VALUE EQUAL_CMP VALUE
-      | VALUE CONTAINS_OP VALUE
+LOGICAL_EXPRESSION: LOGICAL_EXPRESSION AND_KEYWORD LOGICAL_EXPRESSION { $$ = new AndOperationNode($1, $3); }
+                  | LOGICAL_EXPRESSION OR_KEYWORD LOGICAL_EXPRESSION  { $$ = new OrOperationNode($1, $3);  }
+                  | NOT_KEYWORD LOGICAL_EXPRESSION                    { $$ = new NotOperationNode($2);     }
+                  | FILTER                                            { $$ = new FilterByPassNode($1);     }
 ;
 
-SET_EXPRESSION: SET_KEYWORD NAME PERIOD NAME ASSIGNMENT VALUE
+FILTER: VALUE LESS_CMP VALUE             { $$ = new FilterNode($1, $3, LESS);             }
+      | VALUE LESS_OR_EQUAL_CMP VALUE    { $$ = new FilterNode($1, $3, LESS_OR_EQUAL);    }
+      | VALUE GREATER_CMP VALUE          { $$ = new FilterNode($1, $3, GREATER);          }
+      | VALUE GREATER_OR_EQUAL_CMP VALUE { $$ = new FilterNode($1, $3, GREATER_OR_EQUAL); }
+      | VALUE EQUAL_CMP VALUE            { $$ = new FilterNode($1, $3, EQUAL);            }
+      | VALUE CONTAINS_OP VALUE          { $$ = new FilterNode($1, $3, CONTAINS);         }
 ;
 
-DELETE_EXPRESSION: DELETE_KEYWORD NAME
+SET_EXPRESSION: SET_KEYWORD NAME PERIOD NAME ASSIGNMENT VALUE { $$ = new SetExpressionNode(new VariableValueNode($2, $4), $6); }
 ;
 
-RETURN_EXPRESSION: RETURN_EXPRESSION COMMA VALUE
-                 | RETURN_KEYWORD VALUE
+DELETE_EXPRESSION: DELETE_KEYWORD NAME { $$ = new DeleteExpressionNode($2); }
+;
 
-ATTRIBUTE_LIST: NAME PERIOD NAME COLON VALUE COMMA ATTRIBUTE_LIST
-              | NAME PERIOD NAME COLON VALUE
+RETURN_EXPRESSION: RETURN_EXPRESSION COMMA VALUE { $$ = $1; $$->addElement($3);                         }
+                 | RETURN_KEYWORD VALUE          { $$ = new ReturnExpressionNode(); $$->addElement($2); }
 
-CREATE_EXPRESSION: CREATE_KEYWORD VARIABLE_MATCH
-                 | CREATE_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH
+ATTRIBUTE_LIST: NAME COLON VALUE COMMA ATTRIBUTE_LIST { $$ = $5; $$->addAttribute($1, $3);                      }
+              | NAME COLON VALUE                      { std::cout << "\nline 187 name " << $1 << std::endl; $$ = new AttributeListNode(); $$->addAttribute($1, $3); }
+;
 
-VALUE: NAME
-     | BOOL_LITERAL
-     | INT_LITERAL
-     | FLOAT_LITERAL
-     | STRING_LITERAL
-     | NAME PERIOD NAME
+CREATE_EXPRESSION: CREATE_KEYWORD VARIABLE_MATCH { $$ = new CreateExpressionNode($2); }
+                 | CREATE_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH { $$ = new CreateExpressionNode($2, $4, $3); }
+;
+
+VALUE: NAME             { $$ = new VariableValueNode($1, new std::string("")); }
+     | BOOL_LITERAL     { $$ = new BoolLiteralNode($1);       }
+     | INT_LITERAL      { $$ = new IntLiteralNode($1);        }
+     | FLOAT_LITERAL    { $$ = new FloatLiteralNode($1);      }
+     | STRING_LITERAL   { $$ = new StringLiteralNode($1);     }
+     | NAME PERIOD NAME { $$ = new VariableValueNode($1, $3); }
 ;
 %%
 

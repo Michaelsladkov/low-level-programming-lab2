@@ -847,7 +847,7 @@ YY_RULE_SETUP
 case 35:
 YY_RULE_SETUP
 #line 48 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
-{return yy::parser::token_type::NAME                ;}
+{std::cout << "lexer found name\n"; return yy::parser::token_type::NAME                ;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 49 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
