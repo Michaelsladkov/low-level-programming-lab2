@@ -197,7 +197,7 @@ namespace yy {
     /// Symbol semantic values.
     union semantic_type
     {
-#line 39 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 41 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
     std::string               *name;
     std::string               *string;
@@ -732,8 +732,8 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 92,     ///< Last index in yytable_.
-      yynnts_ = 17,  ///< Number of nonterminal symbols.
+      yylast_ = 89,     ///< Last index in yytable_.
+      yynnts_ = 16,  ///< Number of nonterminal symbols.
       yyfinal_ = 10, ///< Termination state number.
       yyntokens_ = 39  ///< Number of tokens.
     };

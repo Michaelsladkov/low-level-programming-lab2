@@ -8,9 +8,11 @@ WS        [ \t\n]+
 NAME      [A-Za-z][A-Za-z0-9_]*
 INTEGER   -?[1-9][0-9]*
 FLOAT     -?[0-9]+\.[0-9]+
-STRING    \".*\"
+STRING    \"[^"]*\"
+COMMENT   \/\/.*\n
 
 %%
+{COMMENT} //do nothing
 "MATCH"|"match"        {return yy::parser::token_type::MATCH_KEYWORD       ;}
 "WHERE"|"where"        {return yy::parser::token_type::WHERE_KEYWORD       ;}
 "RETURN"|"return"      {return yy::parser::token_type::RETURN_KEYWORD      ;}

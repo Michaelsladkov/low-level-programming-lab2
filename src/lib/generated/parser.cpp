@@ -48,14 +48,16 @@
 namespace yy
 {
 
-void parser::error(const std::string&){}
+void parser::error(const std::string& e){
+    std::cout << "Error from handler: " << e << std::endl;
+}
 
 parser::token_type yylex(parser::semantic_type* yylval,                         
                          ParserDriver* driver);
 
 }
 
-#line 59 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 61 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
 
 #ifndef YY_
@@ -127,7 +129,7 @@ parser::token_type yylex(parser::semantic_type* yylval,
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 131 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 133 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
 
   /// Build a parser object.
@@ -563,277 +565,271 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 126 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 127 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { driver->insert((yystack_[1].value.requestNode)); }
-#line 569 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 571 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 3:
-#line 127 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 128 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { driver->insert((yystack_[1].value.requestNode)); }
-#line 575 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 577 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 4:
-#line 130 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 131 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = new RequestNode((yystack_[0].value.matchExpressionNode)); }
-#line 581 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 583 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 5:
-#line 131 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 132 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = new RequestNode((yystack_[0].value.createExpressionNode)); }
-#line 587 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 589 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 6:
-#line 132 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 133 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = (yystack_[1].value.requestNode); (yylhs.value.requestNode)->addExpr((yystack_[0].value.matchExpressionNode)); }
-#line 593 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 595 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 7:
-#line 133 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 134 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = (yystack_[1].value.requestNode); (yylhs.value.requestNode)->addExpr((yystack_[0].value.setExpressionNode)); }
-#line 599 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 601 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 8:
-#line 134 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 135 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = (yystack_[1].value.requestNode); (yylhs.value.requestNode)->addExpr((yystack_[0].value.createExpressionNode)); }
-#line 605 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 607 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 9:
-#line 135 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 136 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = (yystack_[1].value.requestNode); (yylhs.value.requestNode)->addExpr((yystack_[0].value.deleteExpressionNode)); }
-#line 611 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 613 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 10:
-#line 136 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 137 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                        { (yylhs.value.requestNode) = (yystack_[1].value.requestNode); (yylhs.value.requestNode)->addExpr((yystack_[0].value.returnExpressionNode)); }
-#line 617 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 619 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 11:
-#line 139 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 140 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                                                                      { (yylhs.value.matchExpressionNode) = new MatchExpressionNode((yystack_[0].value.variableMatchNode)); std::cout << "parsed  varmatch\n";        }
-#line 623 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 625 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 12:
-#line 140 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 141 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                                                                      { (yylhs.value.matchExpressionNode) = new MatchExpressionNode((yystack_[2].value.variableMatchNode), (yystack_[0].value.variableMatchNode), (yystack_[1].value.relationMatchNode)); }
-#line 629 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 631 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 13:
-#line 141 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 142 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                                                                                      { (yylhs.value.matchExpressionNode) = new MatchExpressionNode((yystack_[2].value.variableMatchNode), (yystack_[0].value.variableMatchNode), (yystack_[1].value.relationMatchNode)); }
-#line 635 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 637 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 14:
-#line 142 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                                     { (yylhs.value.matchExpressionNode) = new MatchExpressionNode((yystack_[2].value.variableMatchNode), (yystack_[0].value.variableMatchNode), (yystack_[1].value.relationMatchNode)); }
-#line 641 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 145 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                       { (yylhs.value.variableMatchNode) = new VariableFilterMatchNode((yystack_[4].value.name), (yystack_[2].value.name), (yystack_[1].value.predicateNode));  }
+#line 643 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 15:
-#line 143 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                                     { (yylhs.value.matchExpressionNode) = new MatchExpressionNode((yystack_[2].value.variableMatchNode), (yystack_[0].value.variableMatchNode), (yystack_[1].value.relationMatchNode)); }
-#line 647 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 146 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                       { std::cout << "line 147 names " << (yystack_[6].value.name) << " " << (yystack_[4].value.name) << std::endl; (yylhs.value.variableMatchNode) = new VariablePatternMatchNode((yystack_[6].value.name), (yystack_[4].value.name), (yystack_[2].value.attributeListNode)); }
+#line 649 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 16:
-#line 146 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                       { (yylhs.value.variableMatchNode) = new VariableFilterMatchNode((yystack_[4].value.name), (yystack_[2].value.name), (yystack_[1].value.predicateNode));  }
-#line 653 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 147 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                       { (yylhs.value.variableMatchNode) = new VariableMatchNode((yystack_[3].value.name), (yystack_[1].value.name)); }
+#line 655 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 17:
-#line 147 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                       { std::cout << "line 147 names " << (yystack_[6].value.name) << " " << (yystack_[4].value.name) << std::endl; (yylhs.value.variableMatchNode) = new VariablePatternMatchNode((yystack_[6].value.name), (yystack_[4].value.name), (yystack_[2].value.attributeListNode)); }
-#line 659 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 148 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                       { (yylhs.value.variableMatchNode) = new VariableMatchNode((yystack_[1].value.name), new std::string("")); }
+#line 661 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 18:
-#line 150 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                   { (yylhs.value.variableMatchNode) = new VariableMatchNode((yystack_[1].value.name), new std::string(""));  std::cout << "anyvar\n"; }
-#line 665 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 151 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                   { (yylhs.value.relationMatchNode) = new RelationMatchNode((yystack_[4].value.name), (yystack_[2].value.name), FORWARD); }
+#line 667 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 19:
-#line 153 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                   { (yylhs.value.relationMatchNode) = new RelationMatchNode((yystack_[4].value.name), (yystack_[2].value.name), FORWARD); }
-#line 671 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 152 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                   { (yylhs.value.relationMatchNode) = new RelationMatchNode((yystack_[4].value.name), (yystack_[2].value.name), REVERSE); }
+#line 673 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 20:
-#line 154 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                   { (yylhs.value.relationMatchNode) = new RelationMatchNode((yystack_[4].value.name), (yystack_[2].value.name), REVERSE); }
-#line 677 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 155 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                { (yylhs.value.relationMatchNode) = new RelationMatchNode(new std::string(""), new std::string(""), ANY); }
+#line 679 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 21:
-#line 157 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                { (yylhs.value.relationMatchNode) = new RelationMatchNode(new std::string(""), new std::string(""), ANY); }
-#line 683 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 158 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                            { (yylhs.value.predicateNode) = new PredicateNode((yystack_[0].value.logicalExpressionNode)); }
+#line 685 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 22:
-#line 160 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                            { (yylhs.value.predicateNode) = new PredicateNode((yystack_[0].value.logicalExpressionNode)); }
-#line 689 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 161 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                      { (yylhs.value.logicalExpressionNode) = new AndOperationNode((yystack_[2].value.logicalExpressionNode), (yystack_[0].value.logicalExpressionNode)); }
+#line 691 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 23:
-#line 163 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                      { (yylhs.value.logicalExpressionNode) = new AndOperationNode((yystack_[2].value.logicalExpressionNode), (yystack_[0].value.logicalExpressionNode)); }
-#line 695 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 162 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                      { (yylhs.value.logicalExpressionNode) = new OrOperationNode((yystack_[2].value.logicalExpressionNode), (yystack_[0].value.logicalExpressionNode));  }
+#line 697 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 24:
-#line 164 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                      { (yylhs.value.logicalExpressionNode) = new OrOperationNode((yystack_[2].value.logicalExpressionNode), (yystack_[0].value.logicalExpressionNode));  }
-#line 701 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 163 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                      { (yylhs.value.logicalExpressionNode) = new NotOperationNode((yystack_[0].value.logicalExpressionNode));     }
+#line 703 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 25:
-#line 165 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                      { (yylhs.value.logicalExpressionNode) = new NotOperationNode((yystack_[0].value.logicalExpressionNode));     }
-#line 707 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 164 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                      { (yylhs.value.logicalExpressionNode) = new FilterByPassNode((yystack_[0].value.filterNode));     }
+#line 709 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 26:
-#line 166 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                      { (yylhs.value.logicalExpressionNode) = new FilterByPassNode((yystack_[0].value.filterNode));     }
-#line 713 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 167 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), LESS);             }
+#line 715 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 27:
-#line 169 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), LESS);             }
-#line 719 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 168 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), LESS_OR_EQUAL);    }
+#line 721 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 28:
-#line 170 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), LESS_OR_EQUAL);    }
-#line 725 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 169 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), GREATER);          }
+#line 727 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 29:
-#line 171 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), GREATER);          }
-#line 731 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 170 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), GREATER_OR_EQUAL); }
+#line 733 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 30:
-#line 172 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), GREATER_OR_EQUAL); }
-#line 737 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 171 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), EQUAL);            }
+#line 739 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 31:
-#line 173 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), EQUAL);            }
-#line 743 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 172 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), CONTAINS);         }
+#line 745 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 32:
-#line 174 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                         { (yylhs.value.filterNode) = new FilterNode((yystack_[2].value.value), (yystack_[0].value.value), CONTAINS);         }
-#line 749 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 175 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                              { (yylhs.value.setExpressionNode) = new SetExpressionNode(new VariableValueNode((yystack_[4].value.name), (yystack_[2].value.name)), (yystack_[0].value.value)); }
+#line 751 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 33:
-#line 177 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                              { (yylhs.value.setExpressionNode) = new SetExpressionNode(new VariableValueNode((yystack_[4].value.name), (yystack_[2].value.name)), (yystack_[0].value.value)); }
-#line 755 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 178 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                       { (yylhs.value.deleteExpressionNode) = new DeleteExpressionNode((yystack_[0].value.name)); }
+#line 757 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 34:
-#line 180 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                       { (yylhs.value.deleteExpressionNode) = new DeleteExpressionNode((yystack_[0].value.name)); }
-#line 761 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 181 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                 { (yylhs.value.returnExpressionNode) = (yystack_[2].value.returnExpressionNode); (yylhs.value.returnExpressionNode)->addElement((yystack_[0].value.value));                         }
+#line 763 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 35:
-#line 183 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                 { (yylhs.value.returnExpressionNode) = (yystack_[2].value.returnExpressionNode); (yylhs.value.returnExpressionNode)->addElement((yystack_[0].value.value));                         }
-#line 767 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 182 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                 { (yylhs.value.returnExpressionNode) = new ReturnExpressionNode(); (yylhs.value.returnExpressionNode)->addElement((yystack_[0].value.value)); }
+#line 769 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 36:
 #line 184 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                 { (yylhs.value.returnExpressionNode) = new ReturnExpressionNode(); (yylhs.value.returnExpressionNode)->addElement((yystack_[0].value.value)); }
-#line 773 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+                                                      { (yylhs.value.attributeListNode) = (yystack_[0].value.attributeListNode); (yylhs.value.attributeListNode)->addAttribute((yystack_[4].value.name), (yystack_[2].value.value));                      }
+#line 775 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 37:
-#line 186 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                      { (yylhs.value.attributeListNode) = (yystack_[0].value.attributeListNode); (yylhs.value.attributeListNode)->addAttribute((yystack_[4].value.name), (yystack_[2].value.value));                      }
-#line 779 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 185 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                      { std::cout << "\nline 187 name " << (yystack_[2].value.name) << std::endl; (yylhs.value.attributeListNode) = new AttributeListNode(); (yylhs.value.attributeListNode)->addAttribute((yystack_[2].value.name), (yystack_[0].value.value)); }
+#line 781 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 38:
-#line 187 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                      { std::cout << "\nline 187 name " << (yystack_[2].value.name) << std::endl; (yylhs.value.attributeListNode) = new AttributeListNode(); (yylhs.value.attributeListNode)->addAttribute((yystack_[2].value.name), (yystack_[0].value.value)); }
-#line 785 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 188 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                 { (yylhs.value.createExpressionNode) = new CreateExpressionNode((yystack_[0].value.variableMatchNode)); }
+#line 787 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 39:
-#line 190 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                 { (yylhs.value.createExpressionNode) = new CreateExpressionNode((yystack_[0].value.variableMatchNode)); }
-#line 791 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 189 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                                                                               { (yylhs.value.createExpressionNode) = new CreateExpressionNode((yystack_[2].value.variableMatchNode), (yystack_[0].value.variableMatchNode), (yystack_[1].value.relationMatchNode)); }
+#line 793 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 40:
-#line 191 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                                                               { (yylhs.value.createExpressionNode) = new CreateExpressionNode((yystack_[2].value.variableMatchNode), (yystack_[0].value.variableMatchNode), (yystack_[1].value.relationMatchNode)); }
-#line 797 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 192 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                        { (yylhs.value.value) = new VariableValueNode((yystack_[0].value.name), new std::string("")); }
+#line 799 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 41:
-#line 194 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                        { (yylhs.value.value) = new VariableValueNode((yystack_[0].value.name), new std::string("")); }
-#line 803 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 193 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                        { (yylhs.value.value) = new BoolLiteralNode((yystack_[0].value.boolean));       }
+#line 805 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 42:
-#line 195 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                        { (yylhs.value.value) = new BoolLiteralNode((yystack_[0].value.boolean));       }
-#line 809 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 194 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                        { (yylhs.value.value) = new IntLiteralNode((yystack_[0].value.integer));        }
+#line 811 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 43:
-#line 196 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                        { (yylhs.value.value) = new IntLiteralNode((yystack_[0].value.integer));        }
-#line 815 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 195 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                        { (yylhs.value.value) = new FloatLiteralNode((yystack_[0].value.real));      }
+#line 817 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 44:
-#line 197 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                        { (yylhs.value.value) = new FloatLiteralNode((yystack_[0].value.real));      }
-#line 821 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 196 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+                        { (yylhs.value.value) = new StringLiteralNode((yystack_[0].value.string));     }
+#line 823 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
   case 45:
-#line 198 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                        { (yylhs.value.value) = new StringLiteralNode((yystack_[0].value.string));     }
-#line 827 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
-    break;
-
-  case 46:
-#line 199 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 197 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
                         { (yylhs.value.value) = new VariableValueNode((yystack_[2].value.name), (yystack_[0].value.name)); }
-#line 833 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 829 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 
 
-#line 837 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 833 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
             default:
               break;
@@ -1010,117 +1006,115 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -61;
+  const signed char parser::yypact_ninf_ = -51;
 
   const signed char parser::yytable_ninf_ = -1;
 
   const signed char
   parser::yypact_[] =
   {
-      18,   -19,   -19,     9,    -2,   -61,   -61,   -15,    -4,    32,
-     -61,    -8,    -6,    10,   -61,   -61,   -61,    23,   -61,   -61,
-     -61,    29,    25,    26,   -61,    31,    31,   -19,   -61,   -61,
-     -61,   -61,    34,   -61,   -61,    35,    -8,    19,    33,    36,
-      37,   -61,   -61,   -61,   -61,   -61,    38,    39,   -61,     7,
-      45,    46,   -16,   -61,    43,    -1,    40,    28,    41,    42,
-     -61,    -8,    -1,    30,   -61,     4,    49,    50,   -61,    51,
-      53,   -61,   -61,    -8,    -8,    -8,    -8,    -8,    -8,    -1,
-      -1,    -8,    56,    65,    54,   -61,   -61,   -61,   -61,   -61,
-     -61,   -61,    77,    61,   -61,   -61,   -61,    40,   -61
+       5,   -15,   -15,    24,    -2,   -51,   -51,   -18,    -6,     2,
+     -51,    20,   -10,    -9,   -51,   -51,   -51,     4,   -51,   -51,
+     -51,   -21,     3,    11,   -51,   -15,   -15,   -15,   -51,   -51,
+     -51,   -51,    14,   -51,   -51,    21,    20,     7,   -51,    27,
+      28,   -51,   -51,   -51,    30,    31,   -51,    10,    47,    48,
+     -51,    54,    -1,   -51,    35,    46,    37,    38,    20,    -1,
+      36,   -51,     8,    55,    45,   -51,    49,    50,   -51,   -51,
+      20,    20,    20,    20,    20,    20,    -1,    -1,    20,    53,
+      62,    64,   -51,   -51,   -51,   -51,   -51,   -51,   -51,    75,
+      59,   -51,   -51,   -51,    35,   -51
   };
 
   const signed char
   parser::yydefact_[] =
   {
-       0,     0,     0,     0,     0,     4,     5,     0,    11,    39,
+       0,     0,     0,     0,     0,     4,     5,     0,    11,    38,
        1,     0,     0,     0,     2,     3,     6,    10,     8,     7,
-       9,     0,     0,     0,    21,     0,     0,     0,    45,    43,
-      44,    42,    41,    36,    34,     0,     0,     0,     0,     0,
-       0,    14,    15,    13,    12,    40,     0,     0,    35,     0,
-       0,     0,     0,    46,     0,     0,     0,     0,     0,     0,
-      18,     0,     0,     0,    26,    22,     0,     0,    16,     0,
-       0,    33,    25,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    29,    30,    27,    28,    31,
-      32,    23,    24,    38,    17,    19,    20,     0,    37
+       9,     0,     0,     0,    20,     0,     0,     0,    44,    42,
+      43,    41,    40,    35,    33,     0,     0,     0,    17,     0,
+       0,    13,    12,    39,     0,     0,    34,     0,     0,     0,
+      45,     0,     0,    16,     0,     0,     0,     0,     0,     0,
+       0,    25,    21,     0,     0,    14,     0,     0,    32,    24,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,    28,    29,    26,    27,    30,    31,    22,    23,
+      37,    15,    18,    19,     0,    36
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -61,   -61,   -61,    84,    63,    14,   -61,    81,   -61,   -11,
-      87,   -61,   -61,   -61,   -61,   -60,    -5
+     -51,   -51,   -51,    82,    17,   -51,    78,   -51,   -11,    84,
+     -51,   -51,   -51,   -51,   -50,    -5
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-      -1,     3,     4,     5,    41,     8,    25,    26,    17,    63,
-       6,    19,    20,    64,    57,    65,    67
+      -1,     3,     4,     5,     8,    25,    26,    17,    60,     6,
+      19,    20,    61,    55,    62,    64
   };
 
   const signed char
   parser::yytable_[] =
   {
-      33,     1,    72,    11,     2,    12,    13,    37,     7,    10,
-      62,    55,    60,    79,    80,    22,     9,    23,    24,    91,
-      92,     1,    14,    21,     2,    48,    28,    29,    30,    31,
-      32,    15,    34,    28,    29,    30,    31,    32,    56,    42,
-      44,    45,    73,    74,    75,    76,    77,    78,    35,    36,
-      71,    22,    37,    23,    38,    39,    68,    49,    40,    46,
-      47,    61,    85,    86,    87,    88,    89,    90,    58,    59,
-      93,    50,    81,    96,    51,    52,    53,    54,    66,    69,
-      70,    83,    82,    84,    94,    95,    79,    97,    16,    43,
-      27,    18,    98
+      33,     1,    37,    11,     2,    12,    13,    38,     1,    69,
+      59,     2,     7,    22,    52,    23,    24,    76,    77,     9,
+      21,    22,    14,    23,    10,    46,    88,    89,    34,    35,
+      36,    15,    39,    28,    29,    30,    31,    32,    53,    44,
+      40,    54,    41,    42,    43,    47,    45,    68,    70,    71,
+      72,    73,    74,    75,    28,    29,    30,    31,    32,    82,
+      83,    84,    85,    86,    87,    48,    49,    90,    50,    51,
+      56,    57,    58,    63,    65,    66,    67,    79,    78,    80,
+      81,    91,    92,    93,    76,    94,    16,    27,    18,    95
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      11,     3,    62,     5,     6,     7,     8,    23,    27,     0,
-      11,     4,    28,     9,    10,    19,     2,    21,    22,    79,
-      80,     3,    24,    38,     6,    36,    34,    35,    36,    37,
-      38,    33,    38,    34,    35,    36,    37,    38,    31,    25,
-      26,    27,    12,    13,    14,    15,    16,    17,    38,    26,
-      61,    19,    23,    21,    29,    29,    28,    38,    27,    25,
-      25,    18,    73,    74,    75,    76,    77,    78,    23,    23,
-      81,    38,    23,    19,    38,    38,    38,    38,    38,    38,
-      38,    30,    32,    30,    28,    20,     9,    26,     4,    26,
-       9,     4,    97
+      11,     3,    23,     5,     6,     7,     8,    28,     3,    59,
+      11,     6,    27,    19,     4,    21,    22,     9,    10,     2,
+      38,    19,    24,    21,     0,    36,    76,    77,    38,    38,
+      26,    33,    29,    34,    35,    36,    37,    38,    28,    25,
+      29,    31,    25,    26,    27,    38,    25,    58,    12,    13,
+      14,    15,    16,    17,    34,    35,    36,    37,    38,    70,
+      71,    72,    73,    74,    75,    38,    38,    78,    38,    38,
+      23,    23,    18,    38,    28,    38,    38,    32,    23,    30,
+      30,    28,    20,    19,     9,    26,     4,     9,     4,    94
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     3,     6,    40,    41,    42,    49,    27,    44,    44,
-       0,     5,     7,     8,    24,    33,    42,    47,    49,    50,
-      51,    38,    19,    21,    22,    45,    46,    46,    34,    35,
-      36,    37,    38,    48,    38,    38,    26,    23,    29,    29,
-      27,    43,    44,    43,    44,    44,    25,    25,    48,    38,
-      38,    38,    38,    38,    38,     4,    31,    53,    23,    23,
-      28,    18,    11,    48,    52,    54,    38,    55,    28,    38,
-      38,    48,    54,    12,    13,    14,    15,    16,    17,     9,
-      10,    23,    32,    30,    30,    48,    48,    48,    48,    48,
-      48,    54,    54,    48,    28,    20,    19,    26,    55
+       0,     3,     6,    40,    41,    42,    48,    27,    43,    43,
+       0,     5,     7,     8,    24,    33,    42,    46,    48,    49,
+      50,    38,    19,    21,    22,    44,    45,    45,    34,    35,
+      36,    37,    38,    47,    38,    38,    26,    23,    28,    29,
+      29,    43,    43,    43,    25,    25,    47,    38,    38,    38,
+      38,    38,     4,    28,    31,    52,    23,    23,    18,    11,
+      47,    51,    53,    38,    54,    28,    38,    38,    47,    53,
+      12,    13,    14,    15,    16,    17,     9,    10,    23,    32,
+      30,    30,    47,    47,    47,    47,    47,    47,    53,    53,
+      47,    28,    20,    19,    26,    54
   };
 
   const signed char
   parser::yyr1_[] =
   {
        0,    39,    40,    40,    41,    41,    41,    41,    41,    41,
-      41,    42,    42,    42,    42,    42,    44,    44,    43,    46,
-      46,    45,    53,    54,    54,    54,    54,    52,    52,    52,
-      52,    52,    52,    50,    51,    47,    47,    55,    55,    49,
-      49,    48,    48,    48,    48,    48,    48
+      41,    42,    42,    42,    43,    43,    43,    43,    45,    45,
+      44,    52,    53,    53,    53,    53,    51,    51,    51,    51,
+      51,    51,    49,    50,    46,    46,    54,    54,    48,    48,
+      47,    47,    47,    47,    47,    47
   };
 
   const signed char
   parser::yyr2_[] =
   {
        0,     2,     2,     2,     1,     1,     2,     2,     2,     2,
-       2,     2,     4,     4,     4,     4,     6,     8,     3,     7,
-       7,     1,     2,     3,     3,     2,     1,     3,     3,     3,
-       3,     3,     3,     6,     2,     3,     2,     5,     3,     2,
-       4,     1,     1,     1,     1,     1,     3
+       2,     2,     4,     4,     6,     8,     5,     3,     7,     7,
+       1,     2,     3,     3,     2,     1,     3,     3,     3,     3,
+       3,     3,     6,     2,     3,     2,     5,     3,     2,     4,
+       1,     1,     1,     1,     1,     3
   };
 
 
@@ -1138,22 +1132,21 @@ namespace yy {
   "DOUBLE_DASH", "COLON", "SCOLON", "PERIOD", "COMMA", "LPAR", "RPAR",
   "LBRACKET", "RBRACKET", "LBRACE", "RBRACE", "END_OF_FILE",
   "STRING_LITERAL", "INT_LITERAL", "FLOAT_LITERAL", "BOOL_LITERAL", "NAME",
-  "$accept", "REQUEST", "REQUEST_B", "MATCH_EXPRESSION",
-  "ANY_VARIABLE_MATCH", "VARIABLE_MATCH", "ANY_RELATION_MATCH",
-  "RELATION_MATCH", "RETURN_EXPRESSION", "VALUE", "CREATE_EXPRESSION",
-  "SET_EXPRESSION", "DELETE_EXPRESSION", "FILTER", "PREDICATE",
-  "LOGICAL_EXPRESSION", "ATTRIBUTE_LIST", YY_NULLPTR
+  "$accept", "REQUEST", "REQUEST_B", "MATCH_EXPRESSION", "VARIABLE_MATCH",
+  "ANY_RELATION_MATCH", "RELATION_MATCH", "RETURN_EXPRESSION", "VALUE",
+  "CREATE_EXPRESSION", "SET_EXPRESSION", "DELETE_EXPRESSION", "FILTER",
+  "PREDICATE", "LOGICAL_EXPRESSION", "ATTRIBUTE_LIST", YY_NULLPTR
   };
 
 
   const unsigned char
   parser::yyrline_[] =
   {
-       0,   126,   126,   127,   130,   131,   132,   133,   134,   135,
-     136,   139,   140,   141,   142,   143,   146,   147,   150,   153,
-     154,   157,   160,   163,   164,   165,   166,   169,   170,   171,
-     172,   173,   174,   177,   180,   183,   184,   186,   187,   190,
-     191,   194,   195,   196,   197,   198,   199
+       0,   127,   127,   128,   131,   132,   133,   134,   135,   136,
+     137,   140,   141,   142,   145,   146,   147,   148,   151,   152,
+     155,   158,   161,   162,   163,   164,   167,   168,   169,   170,
+     171,   172,   175,   178,   181,   182,   184,   185,   188,   189,
+     192,   193,   194,   195,   196,   197
   };
 
   // Print the state stack on the debug stream.
@@ -1236,9 +1229,9 @@ namespace yy {
   }
 
 } // yy
-#line 1240 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
+#line 1233 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
 
-#line 201 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 199 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
 
 namespace yy {

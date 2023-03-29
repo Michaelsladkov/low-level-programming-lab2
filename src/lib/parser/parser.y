@@ -27,7 +27,9 @@ namespace yy { class ParserDriver; }
 namespace yy
 {
 
-void parser::error(const std::string&){}
+void parser::error(const std::string& e){
+    std::cout << "Error from handler: " << e << std::endl;
+}
 
 parser::token_type yylex(parser::semantic_type* yylval,                         
                          ParserDriver* driver);
@@ -102,7 +104,6 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %nterm <requestNode>              REQUEST
 %nterm <requestNode>              REQUEST_B
 %nterm <matchExpressionNode>      MATCH_EXPRESSION
-%nterm <variableMatchNode>        ANY_VARIABLE_MATCH
 %nterm <variableMatchNode>        VARIABLE_MATCH
 %nterm <relationMatchNode>        ANY_RELATION_MATCH
 %nterm <relationMatchNode>        RELATION_MATCH
@@ -138,16 +139,13 @@ REQUEST_B: MATCH_EXPRESSION            { $$ = new RequestNode($1); }
 
 MATCH_EXPRESSION: MATCH_KEYWORD VARIABLE_MATCH                                       { $$ = new MatchExpressionNode($2); std::cout << "parsed  varmatch\n";        }
                 | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH         { $$ = new MatchExpressionNode($2, $4, $3); }
-                | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH ANY_VARIABLE_MATCH     { $$ = new MatchExpressionNode($2, $4, $3); }
-                | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH ANY_VARIABLE_MATCH { $$ = new MatchExpressionNode($2, $4, $3); }
                 | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH     { $$ = new MatchExpressionNode($2, $4, $3); }
 ;
 
 VARIABLE_MATCH: LPAR NAME COLON NAME PREDICATE RPAR                    { $$ = new VariableFilterMatchNode($2, $4, $5);  }
               | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR { std::cout << "line 147 names " << $2 << " " << $4 << std::endl; $$ = new VariablePatternMatchNode($2, $4, $6); }
-;
-
-ANY_VARIABLE_MATCH: LPAR NAME RPAR { $$ = new VariableMatchNode($2, new std::string(""));  std::cout << "anyvar\n"; }
+              | LPAR NAME COLON NAME RPAR                              { $$ = new VariableMatchNode($2, $4); }
+              | LPAR NAME RPAR                                         { $$ = new VariableMatchNode($2, new std::string("")); }
 ;
 
 RELATION_MATCH: DASH LBRACKET NAME COLON NAME RBRACKET RIGHT_ARROW { $$ = new RelationMatchNode($3, $5, FORWARD); }

@@ -21,7 +21,7 @@ void VariableValueNode::print(int level, std::ostream& out) const {
 void StringLiteralNode::print(int level, std::ostream& out) const {
     out << "String Literal node: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Value: " << Value << std::endl;
+    out << "Value: " << *Value << std::endl;
     addSpaces(level, out);
     out << "}" << std::endl;
 }
@@ -216,6 +216,7 @@ void RelationMatchNode::print(int level, std::ostream& out) const {
     default:
         break;
     }
+    out << std::endl;
     addSpaces(level, out);
     out << "}" << std::endl;
 }
@@ -264,7 +265,7 @@ void SetExpressionNode::print(int level, std::ostream& out) const {
 void DeleteExpressionNode::print(int level, std::ostream& out) const {
     out << "Delete Expresssion {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable: " << VariableName << std::endl;
+    out << "Variable: " << *VariableName << std::endl;
     addSpaces(level, out);
     out << "}" << std::endl;
 }
