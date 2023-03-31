@@ -1,6 +1,6 @@
-#line 2 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
+#line 2 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
 
-#line 4 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
+#line 4 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -481,11 +481,11 @@ static const flex_int16_t yy_chk[223] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
-#line 4 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 1 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 4 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
     #include "parser.tab.hpp"    
-#line 488 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
-#line 489 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
+#line 488 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
+#line 489 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
 
 #define INITIAL 0
 
@@ -617,9 +617,9 @@ YY_DECL
 		}
 
 	{
-#line 14 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 14 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 
-#line 623 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
+#line 623 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -679,201 +679,201 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 15 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 15 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 //do nothing
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 16 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::MATCH_KEYWORD       ;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 17 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 17 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::WHERE_KEYWORD       ;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 18 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 18 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::RETURN_KEYWORD      ;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 19 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 19 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::CREATE_KEYWORD      ;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 20 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 20 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::DELETE_KEYWORD      ;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 21 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 21 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::SET_KEYWORD         ;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 22 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 22 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::AND_KEYWORD         ;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 23 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 23 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::OR_KEYWORD          ;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 24 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 24 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::NOT_KEYWORD         ;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 25 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 25 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::GREATER_CMP         ;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 26 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 26 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::GREATER_OR_EQUAL_CMP;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 27 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 27 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::LESS_CMP            ;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 28 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 28 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::LESS_OR_EQUAL_CMP   ;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 29 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 29 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::EQUAL_CMP           ;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 30 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 30 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::CONTAINS_OP         ;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 31 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 31 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::ASSIGNMENT          ;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 32 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 32 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::DASH                ;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 33 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 33 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::DOUBLE_DASH         ;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 34 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 34 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::RIGHT_ARROW         ;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 35 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 35 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::LEFT_ARROW          ;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 36 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 36 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::COLON               ;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 37 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 37 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::SCOLON              ;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 38 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 38 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::PERIOD              ;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 39 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 39 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::COMMA               ;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 40 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 40 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::LPAR                ;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 41 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 41 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::RPAR                ;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 42 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 42 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::LBRACKET            ;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 43 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 43 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::RBRACKET            ;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 44 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 44 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::LBRACE              ;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 45 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 45 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::RBRACE              ;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 46 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 46 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::BOOL_LITERAL        ;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 47 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 47 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::INT_LITERAL         ;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 48 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 48 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::FLOAT_LITERAL       ;}
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 49 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 49 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::STRING_LITERAL      ;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 50 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 50 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::NAME                ;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 51 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 51 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 {return yy::parser::token_type::END_OF_FILE         ;}
 	YY_BREAK
 case 37:
 /* rule 37 can match eol */
 YY_RULE_SETUP
-#line 52 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 52 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 //do nothing
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 53 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 53 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 ECHO;
 	YY_BREAK
-#line 877 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
+#line 877 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1834,5 +1834,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 53 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 53 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 

@@ -14,6 +14,7 @@ class ParserDriver {
     FlexLexer *plex_;
     RequestNode *result;
     int DebugLevel;
+    bool BadInput;
 
 public:
     ParserDriver(FlexLexer *plex, int Debug) : plex_(plex), DebugLevel(Debug) {}
@@ -43,7 +44,12 @@ public:
         return tt;
     }
 
+    void markBadInput() {
+        BadInput = true;
+    }
+
     bool parse() {
+        BadInput = false;
         parser parser(this);
         parser.set_debug_level(DebugLevel);
         if (DebugLevel) std::cout << "begin parsing via parser" << std::endl;
@@ -57,11 +63,16 @@ public:
     }
 
     void printout() const {
-        result->print(0, std::cout);
+        if (BadInput) {
+            std::cout << "Input request incorrect, AST can't be built" << std::endl;
+        } else {
+            result->print(0, std::cout);
+        }
     }
 
     ~ParserDriver() {
-       delete result;
+        if (!BadInput)
+            delete result;
     }
 };
 

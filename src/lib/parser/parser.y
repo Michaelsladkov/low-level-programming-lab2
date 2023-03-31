@@ -28,7 +28,8 @@ namespace yy
 {
 
 void parser::error(const std::string& e){
-    std::cout << "Error from handler: " << e << std::endl;
+    std::cout << "Syntax error has been foud: " << e << std::endl;
+    driver->markBadInput();
 }
 
 parser::token_type yylex(parser::semantic_type* yylval,                         

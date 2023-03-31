@@ -81,8 +81,7 @@ void FilterNode::print(int level, std::ostream& out) const {
         break;
     }
     out << std::endl;
-    addSpaces(level, out);
-    out << "}" << std::endl;
+    addSpaces(level + 4, out);
     out << "Right part: ";
     RHS->print(level + 4, out);
     addSpaces(level, out);
@@ -183,9 +182,9 @@ void VariablePatternMatchNode::print(int level, std::ostream& out) const {
 void VariableFilterMatchNode::print(int level, std::ostream& out) const {
     out << "Variable filter match: {" << std::endl;
     addSpaces(level + 4, out);
-    out << "Variable name: " << *VariableName;
+    out << "Variable name: " << *VariableName << std::endl;
     addSpaces(level + 4, out);
-    out << "Scheme name: " << *SchemeName;
+    out << "Scheme name: " << *SchemeName << std::endl;
     addSpaces(level + 4, out);
     out << "Filter: ";
     Predicate->print(level + 4, out);
