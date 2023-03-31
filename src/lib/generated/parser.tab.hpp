@@ -32,7 +32,7 @@
 
 
 /**
- ** \file /mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp
+ ** \file /mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp
  ** Define the yy::parser class.
  */
 
@@ -41,10 +41,10 @@
 // Undocumented macros, especially those whose name start with YY_,
 // are private implementation details.  Do not rely on them.
 
-#ifndef YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
-# define YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
+#ifndef YY_YY_MNT_D_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
+# define YY_YY_MNT_D_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
 // "%code requires" blocks.
-#line 12 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 12 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
 #include <string>
 #include <iostream>
@@ -55,7 +55,7 @@
 namespace yy { class ParserDriver; }
 
 
-#line 59 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 59 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 # include <cstdlib> // std::abort
@@ -184,7 +184,7 @@ namespace yy { class ParserDriver; }
 #endif
 
 namespace yy {
-#line 188 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 188 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 
@@ -197,7 +197,7 @@ namespace yy {
     /// Symbol semantic values.
     union semantic_type
     {
-#line 41 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
+#line 41 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
 
     std::string               *name;
     std::string               *string;
@@ -220,7 +220,7 @@ namespace yy {
     float                    real;
     bool                     boolean;
 
-#line 224 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 224 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
     };
 #else
@@ -745,10 +745,10 @@ namespace yy {
 
 
 } // yy
-#line 749 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
+#line 749 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.tab.hpp"
 
 
 
 
 
-#endif // !YY_YY_MNT_C_USERS_USER_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED
+#endif // !YY_YY_MNT_D_ITMO_LOW_LEVEL_PROGRAMMING_LOW_LEVEL_PROGRAMMING_LAB2_SRC_LIB_GENERATED_PARSER_TAB_HPP_INCLUDED

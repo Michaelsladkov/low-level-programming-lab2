@@ -13,12 +13,13 @@ namespace yy{
 class ParserDriver {
     FlexLexer *plex_;
     RequestNode *result;
+    int DebugLevel;
 
 public:
-    ParserDriver(FlexLexer *plex) : plex_(plex) {}
+    ParserDriver(FlexLexer *plex, int Debug) : plex_(plex), DebugLevel(Debug) {}
     yy::parser::token_type yylex(yy::parser::semantic_type *yylval) {
         yy::parser::token_type tt = static_cast<yy::parser::token_type>(plex_->yylex());
-        std::cout << "lexer brought this: " << plex_->YYText() << std::endl;
+        if (DebugLevel) std::cout << "lexer brought this: " << plex_->YYText() << std::endl;
         const char *TokenStr = plex_->YYText();
         if (tt == yy::parser::token_type::INT_LITERAL) {
             yylval->integer = std::stoi(TokenStr);
@@ -44,15 +45,15 @@ public:
 
     bool parse() {
         parser parser(this);
-        parser.set_debug_level(1);
-        std::cout << "begin parsing via parser" << std::endl;
+        parser.set_debug_level(DebugLevel);
+        if (DebugLevel) std::cout << "begin parsing via parser" << std::endl;
         bool res = parser.parse();
         return !res;
     }
 
     void insert(RequestNode *v) {
         result = v;
-        std::cout << "something inserted into controller" << std::endl;
+        if (DebugLevel) std::cout << "something inserted into controller" << std::endl;
     }
 
     void printout() const {

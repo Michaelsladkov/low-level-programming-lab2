@@ -124,8 +124,8 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %start REQUEST
 
 %%
-REQUEST: REQUEST_B SCOLON              { driver->insert($1); }
-       | REQUEST_B END_OF_FILE         { driver->insert($1); }
+REQUEST: REQUEST_B SCOLON              { driver->insert($1);           }
+       | REQUEST_B END_OF_FILE         { driver->insert($1); return 0; }
 ;
 
 REQUEST_B: MATCH_EXPRESSION            { $$ = new RequestNode($1); }
@@ -137,13 +137,13 @@ REQUEST_B: MATCH_EXPRESSION            { $$ = new RequestNode($1); }
          | REQUEST_B RETURN_EXPRESSION { $$ = $1; $$->addExpr($2); }
 ;
 
-MATCH_EXPRESSION: MATCH_KEYWORD VARIABLE_MATCH                                       { $$ = new MatchExpressionNode($2); std::cout << "parsed  varmatch\n";        }
+MATCH_EXPRESSION: MATCH_KEYWORD VARIABLE_MATCH                                       { $$ = new MatchExpressionNode($2);         }
                 | MATCH_KEYWORD VARIABLE_MATCH RELATION_MATCH VARIABLE_MATCH         { $$ = new MatchExpressionNode($2, $4, $3); }
                 | MATCH_KEYWORD VARIABLE_MATCH ANY_RELATION_MATCH VARIABLE_MATCH     { $$ = new MatchExpressionNode($2, $4, $3); }
 ;
 
 VARIABLE_MATCH: LPAR NAME COLON NAME PREDICATE RPAR                    { $$ = new VariableFilterMatchNode($2, $4, $5);  }
-              | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR { std::cout << "line 147 names " << $2 << " " << $4 << std::endl; $$ = new VariablePatternMatchNode($2, $4, $6); }
+              | LPAR NAME COLON NAME LBRACE ATTRIBUTE_LIST RBRACE RPAR { $$ = new VariablePatternMatchNode($2, $4, $6); }
               | LPAR NAME COLON NAME RPAR                              { $$ = new VariableMatchNode($2, $4); }
               | LPAR NAME RPAR                                         { $$ = new VariableMatchNode($2, new std::string("")); }
 ;
@@ -182,7 +182,7 @@ RETURN_EXPRESSION: RETURN_EXPRESSION COMMA VALUE { $$ = $1; $$->addElement($3); 
                  | RETURN_KEYWORD VALUE          { $$ = new ReturnExpressionNode(); $$->addElement($2); }
 
 ATTRIBUTE_LIST: NAME COLON VALUE COMMA ATTRIBUTE_LIST { $$ = $5; $$->addAttribute($1, $3);                      }
-              | NAME COLON VALUE                      { std::cout << "\nline 187 name " << $1 << std::endl; $$ = new AttributeListNode(); $$->addAttribute($1, $3); }
+              | NAME COLON VALUE                      { $$ = new AttributeListNode(); $$->addAttribute($1, $3); }
 ;
 
 CREATE_EXPRESSION: CREATE_KEYWORD VARIABLE_MATCH { $$ = new CreateExpressionNode($2); }

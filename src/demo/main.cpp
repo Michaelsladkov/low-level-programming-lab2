@@ -9,10 +9,8 @@ int yyFlexLexer::yywrap() {
 int main()
 {
     FlexLexer* lexer = new yyFlexLexer;
-    yy::ParserDriver driver(lexer);
-    std::cout << "begin parsing" << std::endl;
+    yy::ParserDriver driver(lexer, 0);
     driver.parse();
-    std::cout << "parsing finished" << std::endl;
     driver.printout();
     delete lexer;
 }

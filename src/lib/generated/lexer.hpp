@@ -2,9 +2,9 @@
 #define yyHEADER_H 1
 #define yyIN_HEADER 1
 
-#line 6 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"
+#line 6 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"
 
-#line 8 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"
+#line 8 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -416,9 +416,9 @@ static int yy_flex_strlen ( const char * );
 #undef yyTABLES_NAME
 #endif
 
-#line 53 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
+#line 53 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.l"
 
 
-#line 423 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"
+#line 423 "/mnt/d/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/lexer.hpp"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

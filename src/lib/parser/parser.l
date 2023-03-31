@@ -47,7 +47,7 @@ COMMENT   \/\/.*\n
 {INTEGER}              {return yy::parser::token_type::INT_LITERAL         ;}
 {FLOAT}                {return yy::parser::token_type::FLOAT_LITERAL       ;}
 {STRING}               {return yy::parser::token_type::STRING_LITERAL      ;}
-{NAME}                 {std::cout << "lexer found name\n"; return yy::parser::token_type::NAME                ;}
+{NAME}                 {return yy::parser::token_type::NAME                ;}
 <<EOF>>                {return yy::parser::token_type::END_OF_FILE         ;}
 {WS} //do nothing
 %%
