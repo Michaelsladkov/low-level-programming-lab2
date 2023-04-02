@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
+#include <sstream>
 #include <FlexLexer.h>
 
 #include "ast.hpp"
@@ -54,6 +55,18 @@ public:
         parser.set_debug_level(DebugLevel);
         if (DebugLevel) std::cout << "begin parsing via parser" << std::endl;
         bool res = parser.parse();
+        return !res;
+    }
+
+    bool parse(std::string string) {
+        BadInput = false;
+        auto StringStream = std::istringstream(string);
+        auto Buff = plex_->yy_create_buffer(StringStream, string.length());
+        plex_->yy_switch_to_buffer(Buff);
+        parser parser(this);
+        parser.set_debug_level(DebugLevel);
+        bool res = parser.parse();
+        plex_->yy_delete_buffer(Buff);
         return !res;
     }
 

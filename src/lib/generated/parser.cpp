@@ -567,7 +567,7 @@ namespace yy {
             {
   case 2:
 #line 128 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/parser/parser.y"
-                                       { driver->insert((yystack_[1].value.requestNode));           }
+                                       { driver->insert((yystack_[1].value.requestNode)); return 0; }
 #line 572 "/mnt/c/Users/User/ITMO/low-level-programming/low-level-programming-lab2/src/lib/generated/parser.cpp"
     break;
 

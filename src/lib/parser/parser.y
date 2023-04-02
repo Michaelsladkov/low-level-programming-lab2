@@ -125,7 +125,7 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %start REQUEST
 
 %%
-REQUEST: REQUEST_B SCOLON              { driver->insert($1);           }
+REQUEST: REQUEST_B SCOLON              { driver->insert($1); return 0; }
        | REQUEST_B END_OF_FILE         { driver->insert($1); return 0; }
 ;
 
